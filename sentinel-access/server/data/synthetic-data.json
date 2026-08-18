@@ -1,0 +1,254 @@
+{
+  "meta": {
+    "description": "Synthetic demo data for Sentinel Access, derived from hardcoded frontend fixtures (client/src/pages/Home.tsx and client/src/components/WorkspaceViews.tsx). All identities, addresses, IPs, event volumes, and locations are fictitious and safe for public/hackathon demo use.",
+    "generatedFrom": [
+      "client/src/pages/Home.tsx",
+      "client/src/components/WorkspaceViews.tsx"
+    ],
+    "lastSyncUtc": "08:45:18",
+    "totalActivitiesChecked": 1482,
+    "dataSourcesNormalized": 8
+  },
+
+  "summaryMetrics": {
+    "activitiesChecked": 1482,
+    "needsAttention": 17,
+    "mostUrgentCase": {
+      "rank": "01",
+      "label": "Unusual permission change"
+    },
+    "averageReviewTime": "4m 18s",
+    "signalConfidencePct": 94.2,
+    "identityCoveragePct": 87
+  },
+
+  "alerts": [
+    {
+      "id": "ALT-2841",
+      "severity": "Critical",
+      "title": "Impossible travel + privilege pivot",
+      "entity": "Aisha Rahman",
+      "role": "Cloud Engineer",
+      "source": "185.220.101.47",
+      "region": "Frankfurt, DE",
+      "service": "AWS IAM",
+      "score": 96,
+      "time": "08:42 UTC",
+      "description": "A privileged console session originated from a new anonymizing network shortly after a successful session in Singapore.",
+      "signals": ["New ASN", "11,240 km in 39 min", "AssumeRole to Admin", "Outside peer baseline"],
+      "baseline": "Aisha typically signs in from Singapore on weekdays between 08:00-19:00 UTC and has not used this ASN in the past 90 days.",
+      "recommended": "Require step-up authentication and review the created access key before allowing further privilege changes.",
+      "status": null
+    },
+    {
+      "id": "ALT-2840",
+      "severity": "High",
+      "title": "Unusual bulk secret retrieval",
+      "entity": "build-runner-prod",
+      "role": "Service identity",
+      "source": "10.41.16.90",
+      "region": "us-east-1",
+      "service": "AWS Secrets Manager",
+      "score": 89,
+      "time": "08:31 UTC",
+      "description": "The deployment identity read 28 secrets outside its normal release window.",
+      "signals": ["5.6x normal volume", "New secret path", "Weekend pattern", "No change ticket"],
+      "baseline": "This workload normally retrieves 4-6 scoped secrets only during the 02:00 UTC release window.",
+      "recommended": "Compare the task definition with the latest approved deployment and rotate any unneeded credentials.",
+      "status": null
+    },
+    {
+      "id": "ALT-2838",
+      "severity": "High",
+      "title": "Dormant account reactivated",
+      "entity": "noah.williams",
+      "role": "Data Analyst",
+      "source": "45.83.64.12",
+      "region": "Toronto, CA",
+      "service": "Azure AD",
+      "score": 81,
+      "time": "08:04 UTC",
+      "description": "An account inactive for 63 days signed in and enumerated production storage containers.",
+      "signals": ["Dormant 63 days", "First managed device", "Storage enumeration"],
+      "baseline": "Noah's identity has no recorded activity since the contractor offboarding review in June.",
+      "recommended": "Validate current employment status and terminate active refresh tokens if access is no longer required.",
+      "status": null
+    },
+    {
+      "id": "ALT-2837",
+      "severity": "Medium",
+      "title": "New API geography",
+      "entity": "maya.chen",
+      "role": "Platform Engineer",
+      "source": "89.187.161.75",
+      "region": "Bucharest, RO",
+      "service": "GitHub Enterprise",
+      "score": 67,
+      "time": "07:46 UTC",
+      "description": "A personal access token performed repository administration from an unseen country.",
+      "signals": ["New country", "PAT usage", "Repository settings"],
+      "baseline": "Maya's prior 30-day access is limited to London and Amsterdam through managed devices.",
+      "recommended": "Confirm travel, inspect the token's scope, and revoke it if it was not intentionally used.",
+      "status": null
+    },
+    {
+      "id": "ALT-2834",
+      "severity": "Medium",
+      "title": "Policy edit outside change window",
+      "entity": "samir.patel",
+      "role": "Security Analyst",
+      "source": "172.20.4.22",
+      "region": "us-west-2",
+      "service": "AWS IAM",
+      "score": 61,
+      "time": "07:15 UTC",
+      "description": "An S3 bucket policy change was performed shortly after a denied service-control-policy action.",
+      "signals": ["Denied action sequence", "Out-of-window change", "Sensitive resource"],
+      "baseline": "Samir's policy changes usually occur through CI with linked change records, not the console.",
+      "recommended": "Compare the policy version with the approved infrastructure-as-code change and document the exception.",
+      "status": null
+    }
+  ],
+
+  "modelRationale": {
+    "topFindingId": "ALT-2841",
+    "explanation": "The strongest signal is not a single unusual event. It is the sequence: an unfamiliar network, an impossible geography transition, and an immediate privilege change.",
+    "signals": [
+      { "label": "Identity deviation", "score": 96, "tone": "#ff5962" },
+      { "label": "Access sequence", "score": 91, "tone": "#f5ae45" },
+      { "label": "Asset sensitivity", "score": 82, "tone": "#94a4b5" },
+      { "label": "Peer-group variance", "score": 76, "tone": "#39e0c5" }
+    ]
+  },
+
+  "accessTrend": [
+    { "label": "00", "events": 116, "anomalies": 3 },
+    { "label": "03", "events": 94, "anomalies": 2 },
+    { "label": "06", "events": 126, "anomalies": 4 },
+    { "label": "09", "events": 226, "anomalies": 11 },
+    { "label": "12", "events": 284, "anomalies": 9 },
+    { "label": "15", "events": 249, "anomalies": 6 },
+    { "label": "18", "events": 314, "anomalies": 13 },
+    { "label": "21", "events": 180, "anomalies": 5 }
+  ],
+  "accessTrendPeakLabel": "18:00 UTC",
+
+  "serviceRisk": [
+    { "name": "IAM", "risk": 88, "events": 410 },
+    { "name": "Secrets", "risk": 71, "events": 276 },
+    { "name": "Azure AD", "risk": 63, "events": 224 },
+    { "name": "GitHub", "risk": 44, "events": 186 },
+    { "name": "GCP", "risk": 29, "events": 101 }
+  ],
+  "serviceRiskSummary": {
+    "highestRiskService": "IAM",
+    "sensitiveAssets": 31,
+    "coverage": "8 / 8"
+  },
+
+  "activityLog": [
+    { "time": "08:42", "actor": "Aisha Rahman", "action": "Signed in and changed an admin permission", "source": "Frankfurt, DE", "system": "AWS IAM", "status": "Needs attention", "tone": "critical" },
+    { "time": "08:31", "actor": "build-runner-prod", "action": "Read 28 protected deployment secrets", "source": "us-east-1", "system": "Secrets Manager", "status": "Needs attention", "tone": "high" },
+    { "time": "08:04", "actor": "noah.williams", "action": "Opened dormant account and listed storage", "source": "Toronto, CA", "system": "Azure AD", "status": "Needs attention", "tone": "high" },
+    { "time": "07:46", "actor": "maya.chen", "action": "Updated a repository setting", "source": "Bucharest, RO", "system": "GitHub", "status": "Review later", "tone": "medium" },
+    { "time": "07:32", "actor": "data-pipeline", "action": "Completed its scheduled warehouse refresh", "source": "us-west-2", "system": "GCP", "status": "Normal", "tone": "normal" },
+    { "time": "07:15", "actor": "samir.patel", "action": "Updated a production storage policy", "source": "us-west-2", "system": "AWS IAM", "status": "Review later", "tone": "medium" }
+  ],
+
+  "identities": [
+    {
+      "name": "Aisha Rahman",
+      "initials": "AR",
+      "role": "Cloud Engineer",
+      "activity": "Unusual sign-in and permission change",
+      "score": 96,
+      "color": "#ff5962",
+      "description": "Usually signs in from Singapore during weekday working hours."
+    },
+    {
+      "name": "build-runner-prod",
+      "initials": "BR",
+      "role": "Service account",
+      "activity": "Unusual secret retrieval volume",
+      "score": 89,
+      "color": "#f5ae45",
+      "description": "Usually reads 4-6 deployment secrets during scheduled releases."
+    },
+    {
+      "name": "Noah Williams",
+      "initials": "NW",
+      "role": "Data Analyst",
+      "activity": "Returned after 63 days of inactivity",
+      "score": 81,
+      "color": "#f5ae45",
+      "description": "Had no recorded activity since the contractor offboarding review."
+    },
+    {
+      "name": "Maya Chen",
+      "initials": "MC",
+      "role": "Platform Engineer",
+      "activity": "New country used for repository access",
+      "score": 67,
+      "color": "#94a4b5",
+      "description": "Usually works from London and Amsterdam using managed devices."
+    }
+  ],
+
+  "cloudSources": [
+    { "name": "AWS IAM", "type": "Identity and permissions", "status": "Connected", "eventsToday": 410, "health": "Healthy", "icon": "KeyRound", "color": "#39e0c5", "dataFreshnessMin": 2 },
+    { "name": "AWS Secrets Manager", "type": "Sensitive credentials", "status": "Connected", "eventsToday": 276, "health": "Needs review", "icon": "LockKeyhole", "color": "#f5ae45", "dataFreshnessMin": 2 },
+    { "name": "Azure AD", "type": "Workforce identities", "status": "Connected", "eventsToday": 224, "health": "Healthy", "icon": "Users", "color": "#39e0c5", "dataFreshnessMin": 2 },
+    { "name": "GitHub Enterprise", "type": "Source-code access", "status": "Connected", "eventsToday": 186, "health": "Healthy", "icon": "PanelTop", "color": "#39e0c5", "dataFreshnessMin": 2 },
+    { "name": "GCP Audit Logs", "type": "Cloud activity", "status": "Connected", "eventsToday": 101, "health": "Limited history", "icon": "Cloud", "color": "#94a4b5", "dataFreshnessMin": 2 }
+  ],
+  "cloudSourcesOnline": 5,
+
+  "policies": [
+    { "title": "New country sign-in", "description": "Let us know when an account signs in from a country it has not used before.", "enabled": true, "category": "Location" },
+    { "title": "Sensitive permission changes", "description": "Raise an alert when someone creates or changes powerful account permissions.", "enabled": true, "category": "Permissions" },
+    { "title": "Dormant account activity", "description": "Raise an alert when an account returns after 30 days without activity.", "enabled": true, "category": "Account lifecycle" },
+    { "title": "Large secret retrieval", "description": "Raise an alert when a service reads far more protected secrets than usual.", "enabled": true, "category": "Sensitive data" },
+    { "title": "Out-of-hours activity", "description": "Review meaningful changes made outside the usual team work window.", "enabled": false, "category": "Timing" }
+  ],
+
+  "reports": [
+    { "title": "Today's security summary", "detail": "17 items needing attention, grouped by urgency", "period": "Today", "type": "PDF-ready summary" },
+    { "title": "Access activity export", "detail": "All normalized activities and their plain-language explanations", "period": "Last 24 hours", "type": "CSV data" },
+    { "title": "Identity review pack", "detail": "Activity and risk context for the four most unusual accounts", "period": "This week", "type": "Shareable brief" }
+  ],
+
+  "severityTone": {
+    "Critical": { "label": "Critical", "colorDot": "#ff5962" },
+    "High": { "label": "High", "colorDot": "#f5ae45" },
+    "Medium": { "label": "Medium", "colorDot": "#94a4b5" },
+    "Low": { "label": "Low", "colorDot": "#39e0c5" }
+  },
+
+  "serviceOptions": ["All services", "AWS IAM", "AWS Secrets Manager", "Azure AD", "GitHub Enterprise"],
+
+  "navigation": {
+    "primary": [
+      { "label": "Command center", "key": "command" },
+      { "label": "Activity explorer", "key": "activity" },
+      { "label": "Identity profiles", "key": "identities" },
+      { "label": "Cloud estate", "key": "estate" },
+      { "label": "Policies", "key": "policies" }
+    ],
+    "operations": [
+      { "label": "Reports", "key": "reports" },
+      { "label": "Configuration", "key": "settings" }
+    ]
+  },
+
+  "map": {
+    "defaultCenter": { "lat": 37.7749, "lng": -122.4194 },
+    "defaultZoom": 12,
+    "sampleMarker": { "lat": 37.7749, "lng": -122.4194, "title": "San Francisco" }
+  },
+
+  "signedInDemoUser": {
+    "name": "Aisha Rahman",
+    "initials": "AR",
+    "title": "Cloud Security Analyst"
+  }
+}

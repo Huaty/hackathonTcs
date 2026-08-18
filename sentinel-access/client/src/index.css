@@ -1,0 +1,100 @@
+/* Signal Room reminder: graphite field, mineral text, Signal Teal for steady-state meaning, and warm color only for risk. */
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius: 0.75rem;
+}
+
+:root,
+.dark {
+  --background: #091019;
+  --foreground: #e7edf2;
+  --card: #101923;
+  --card-foreground: #e7edf2;
+  --popover: #111b26;
+  --popover-foreground: #e7edf2;
+  --primary: #39e0c5;
+  --primary-foreground: #07100f;
+  --secondary: #172230;
+  --secondary-foreground: #c7d2dc;
+  --muted: #182331;
+  --muted-foreground: #8292a1;
+  --accent: #162a31;
+  --accent-foreground: #a8fff0;
+  --border: rgba(177, 204, 221, 0.13);
+  --input: rgba(177, 204, 221, 0.14);
+  --ring: #39e0c5;
+}
+
+* { border-color: var(--border); }
+html { scroll-behavior: smooth; }
+body {
+  min-width: 320px;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+}
+button, a, input, select { -webkit-tap-highlight-color: transparent; }
+button:not(:disabled) { cursor: pointer; }
+button:focus-visible, a:focus-visible, select:focus-visible { outline: 2px solid #39e0c5; outline-offset: 3px; }
+
+.app-shell {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 78% 3%, rgba(33, 159, 158, 0.12), transparent 30rem),
+    radial-gradient(circle at 15% 92%, rgba(33, 80, 104, 0.10), transparent 34rem),
+    #091019;
+}
+.signal-grid {
+  background-image:
+    linear-gradient(rgba(103, 150, 173, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(103, 150, 173, 0.045) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: linear-gradient(to bottom, black 0%, transparent 80%);
+}
+.glass-panel {
+  background: linear-gradient(135deg, rgba(19, 30, 42, 0.88), rgba(13, 22, 31, 0.88));
+  border: 1px solid rgba(182, 210, 223, 0.11);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.16), inset 0 1px 0 rgba(255,255,255,0.025);
+}
+.hairline { border-color: rgba(178, 210, 226, 0.10); }
+.mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+.metric-value { letter-spacing: -0.045em; }
+.status-pulse { box-shadow: 0 0 0 0 rgba(57, 224, 197, 0.42); }
+@media (prefers-reduced-motion: no-preference) {
+  .status-pulse { animation: sentinel-pulse 1.9s ease-out infinite; }
+  .queue-row { transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1), background 160ms ease, border-color 160ms ease; }
+  .queue-row:hover { transform: translateX(3px); }
+}
+@keyframes sentinel-pulse { 70% { box-shadow: 0 0 0 7px rgba(57, 224, 197, 0); } 100% { box-shadow: 0 0 0 0 rgba(57, 224, 197, 0); } }
+.risk-ticks { background-image: repeating-linear-gradient(90deg, rgba(255,255,255,0.13) 0 1px, transparent 1px 9px); }
+.sweep-line { background: linear-gradient(90deg, transparent, rgba(57, 224, 197, 0.75), transparent); }
+.segment-trace { display: grid; gap: 3px; }
+.segment-trace > span { min-width: 0; height: 5px; border-radius: 1px; background: rgba(206, 226, 235, 0.10); }
+.segment-trace > span.is-lit { box-shadow: 0 0 8px color-mix(in srgb, var(--trace-color) 24%, transparent); background: var(--trace-color); }
+
+@media (max-width: 767px) {
+  .desktop-rail { display: none; }
+}
