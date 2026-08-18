@@ -82,17 +82,81 @@ def _extract_records(text: str, is_json: bool) -> list[dict]:
     return list(reader)
 
 
+def _extract_records_rich(text: str, filename: str, content_type: str) -> list[dict]:
+    """Record extraction for the mode=identities/events rich-import contract
+    (contracts/datasets.md): JSON array/wrapped-array, JSONL (one object per
+    line), or CSV, all coerced to plain dict rows."""
+    if filename.endswith(".jsonl") or "jsonl" in content_type:
+        records: list[dict] = []
+        for line_no, line in enumerate(text.splitlines(), start=1):
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                parsed_line = json.loads(line)
+            except json.JSONDecodeError as exc:
+                raise HTTPException(status_code=400, detail=f"Line {line_no}: invalid JSON: {exc}") from exc
+            if not isinstance(parsed_line, dict):
+                raise HTTPException(status_code=400, detail=f"Line {line_no}: expected a JSON object")
+            records.append(parsed_line)
+        if not records:
+            raise HTTPException(status_code=400, detail="JSONL file had no usable records.")
+        return records
+
+    if filename.endswith(".csv") or "csv" in content_type:
+        reader = csv.DictReader(io.StringIO(text))
+        if not reader.fieldnames:
+            raise HTTPException(status_code=400, detail="CSV file needs a header row.")
+        return list(reader)
+
+    try:
+        parsed = json.loads(text)
+    except json.JSONDecodeError as exc:
+        raise HTTPException(status_code=400, detail=f"Invalid JSON: {exc}") from exc
+
+    if isinstance(parsed, list):
+        candidate = parsed
+    elif isinstance(parsed, dict):
+        candidate = parsed.get("identities") or parsed.get("events") or parsed.get("records") or parsed.get("data")
+    else:
+        candidate = None
+
+    if not isinstance(candidate, list) or not candidate or not all(isinstance(item, dict) for item in candidate):
+        raise HTTPException(
+            status_code=400,
+            detail="JSON file must contain an array of objects, or an identities/events/records/data array.",
+        )
+    return candidate
+
+
 @router.post("/datasets", response_model=DatasetImportResult)
-async def import_dataset(file: UploadFile = File(...), store: Store = Depends(get_store)) -> DatasetImportResult:
+async def import_dataset(
+    file: UploadFile = File(...), mode: Optional[str] = None, store: Store = Depends(get_store)
+) -> DatasetImportResult:
     raw_bytes = await file.read()
     filename = (file.filename or "").lower()
-    is_json = filename.endswith(".json") or "json" in (file.content_type or "")
+    content_type = file.content_type or ""
 
     try:
         text = raw_bytes.decode("utf-8-sig")
     except UnicodeDecodeError as exc:
         raise HTTPException(status_code=400, detail="File is not valid UTF-8 text.") from exc
 
+    if mode in ("identities", "events"):
+        candidates = _extract_records_rich(text, filename, content_type)
+        if len(candidates) > MAX_RECORDS:
+            raise HTTPException(
+                status_code=400,
+                detail=f"File exceeds the {MAX_RECORDS:,} record limit (found {len(candidates):,}).",
+            )
+        if mode == "identities":
+            return store.import_identities(candidates)
+        return store.import_events(candidates)
+
+    if mode is not None:
+        raise HTTPException(status_code=400, detail=f"Unsupported mode '{mode}'")
+
+    is_json = filename.endswith(".json") or "json" in content_type
     candidates = _extract_records(text, is_json)
 
     if len(candidates) > MAX_RECORDS:
@@ -116,6 +180,6 @@ async def import_dataset(file: UploadFile = File(...), store: Store = Depends(ge
     if not accepted:
         raise HTTPException(status_code=400, detail="No usable records were found in the uploaded file.")
 
-    store.replace_activity_log(accepted, "imported")
+    store.append_activity_events(accepted)
 
     return DatasetImportResult(acceptedCount=len(accepted), rejectedCount=len(errors), errors=errors[:20])

@@ -1,0 +1,19 @@
+Deck purpose: Help hackathon judges understand Sentinel Access, its current MVP, the designed risk/ingestion expansion, and why the approach is credible.
+
+Primary repository sources:
+- sentinel-access/CONTEXT.md
+- sentinel-access/ideas.md
+- sentinel-access/backend/app/main.py
+- sentinel-access/backend/app/db.py
+- sentinel-access/backend/app/ai_client.py
+- sentinel-access/backend/app/routers/command_center.py
+- sentinel-access/backend/app/routers/copilot.py
+- sentinel-access/backend/app/routers/reports.py
+- sentinel-access/backend/app/routers/datasets.py
+- specs/004-contextual-risk-scoring/spec.md
+- specs/004-contextual-risk-scoring/plan.md
+- specs/005-cloud-log-ingestion/spec.md
+- specs/005-cloud-log-ingestion/plan.md
+
+Source policy: No external web claims or external image assets are used. “Implemented” refers to source code present in the workspace. “Designed next” and “planned” refer to draft specifications and implementation plans.
+

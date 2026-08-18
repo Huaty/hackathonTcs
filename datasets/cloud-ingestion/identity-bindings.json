@@ -1,0 +1,59 @@
+{
+  "mappingVersion": "identity-map-v1",
+  "bindings": [
+    {
+      "provider": "aws_cloudtrail",
+      "sourceAccountId": "111122223333",
+      "principalKey": "arn:aws:iam::111122223333:user/aisha.rahman",
+      "identityId": "id-aisha-rahman"
+    },
+    {
+      "provider": "aws_cloudtrail",
+      "sourceAccountId": "111122223333",
+      "principalKey": "arn:aws:iam::111122223333:user/marco.silva",
+      "identityId": "id-marco-silva"
+    },
+    {
+      "provider": "aws_cloudtrail",
+      "sourceAccountId": "111122223333",
+      "principalKey": "arn:aws:iam::111122223333:role/demo-deploy-role",
+      "identityId": "id-svc-deploy"
+    },
+    {
+      "provider": "azure_activity_log",
+      "sourceAccountId": "00000000-1111-2222-3333-444444444444",
+      "principalKey": "aaaaaaaa-1111-4111-8111-aaaaaaaaaaaa",
+      "identityId": "id-aisha-rahman"
+    },
+    {
+      "provider": "azure_activity_log",
+      "sourceAccountId": "00000000-1111-2222-3333-444444444444",
+      "principalKey": "bbbbbbbb-2222-4222-8222-bbbbbbbbbbbb",
+      "identityId": "id-marco-silva"
+    },
+    {
+      "provider": "azure_activity_log",
+      "sourceAccountId": "00000000-1111-2222-3333-444444444444",
+      "principalKey": "cccccccc-3333-4333-8333-cccccccccccc",
+      "identityId": "id-svc-deploy"
+    },
+    {
+      "provider": "gcp_audit_log",
+      "sourceAccountId": "sentinel-demo-001",
+      "principalKey": "aisha.rahman@example.invalid",
+      "identityId": "id-aisha-rahman"
+    },
+    {
+      "provider": "gcp_audit_log",
+      "sourceAccountId": "sentinel-demo-001",
+      "principalKey": "marco.silva@example.invalid",
+      "identityId": "id-marco-silva"
+    },
+    {
+      "provider": "gcp_audit_log",
+      "sourceAccountId": "sentinel-demo-001",
+      "principalKey": "demo-deploy@sentinel-demo-001.iam.gserviceaccount.com",
+      "identityId": "id-svc-deploy"
+    }
+  ]
+}

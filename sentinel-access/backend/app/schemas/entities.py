@@ -1,6 +1,6 @@
 from typing import Literal, Optional
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict, Field
 
 FindingStatus = Literal["open", "in_progress", "escalated"]
 
@@ -78,6 +78,7 @@ class ActivityEvent(BaseModel):
 
 
 class Identity(BaseModel):
+    identityId: str
     name: str
     initials: str
     role: str
@@ -85,6 +86,11 @@ class Identity(BaseModel):
     score: int
     color: str
     description: str
+    identityType: Literal["human", "service", "workload"] = "human"
+    status: str = "active"
+    homeTimezone: str = "UTC"
+    baselineConfidence: Optional[Literal["low", "high"]] = None
+    lastSeenAt: Optional[str] = None
 
 
 class CloudSource(BaseModel):
@@ -99,10 +105,15 @@ class CloudSource(BaseModel):
 
 
 class PolicyRule(BaseModel):
+    ruleId: str
     title: str
     description: str
     enabled: bool
-    category: str
+    category: Literal["context", "action", "compound_sequence"]
+    conditionKey: str
+    points: int = Field(ge=0, le=100)
+    severityFloor: Optional[Literal["High", "Critical"]] = None
+    policyVersion: str
 
 
 class ReportTemplate(BaseModel):
@@ -121,6 +132,10 @@ class DatasetImportResult(BaseModel):
     acceptedCount: int
     rejectedCount: int
     errors: list[str]
+    duplicateCount: int = 0
+    identitiesCreated: int = 0
+    identitiesUpdated: int = 0
+    eventsStored: int = 0
 
 
 class CommandCenterResponse(BaseModel):
@@ -163,7 +178,186 @@ class ReportPrepareResponse(BaseModel):
     title: str
     status: Literal["ready"]
     preparedAt: str
+    narrative: Optional[str] = None
 
 
 class StatusUpdateRequest(BaseModel):
     status: FindingStatus
+
+
+class FindingExplanation(BaseModel):
+    findingId: str
+    explanation: str
+    source: Literal["ai", "fallback"]
+
+
+class CopilotQueryRequest(BaseModel):
+    question: str
+
+
+class CopilotResponse(BaseModel):
+    answer: str
+    findings: list[Finding] = []
+    activity: list[ActivityEvent] = []
+    identities: list[Identity] = []
+
+
+# -- Feature 004: policy-first AI contextual risk scoring -----------------
+
+Severity = Literal["Low", "Medium", "High", "Critical"]
+RuleState = Literal["matched", "not_matched", "unknown", "disabled"]
+AIStatus = Literal["applied", "zero", "low_confidence", "invalid", "unavailable"]
+AIAdjustment = Literal[-15, -5, 0, 10, 20, 25]
+
+
+class SecurityEvent(BaseModel):
+    eventId: str
+    identityId: str
+    timestampUtc: str
+    sourceIp: Optional[str] = None
+    location: Optional[str] = None
+    cloudService: str
+    action: str
+    resource: str = "—"
+    outcome: str = "success"
+    sessionId: Optional[str] = None
+    correlationId: Optional[str] = None
+    rawPayload: dict = Field(default_factory=dict)
+
+
+class BaselineHours(BaseModel):
+    start: str
+    end: str
+
+
+class IdentityBaseline(BaseModel):
+    baselineId: str
+    identityId: str
+    windowStartUtc: str
+    windowEndUtc: str
+    usualHours: list[BaselineHours] = Field(default_factory=list)
+    usualSourceIps: list[str] = Field(default_factory=list)
+    usualLocations: list[str] = Field(default_factory=list)
+    usualServices: list[str] = Field(default_factory=list)
+    usualActions: list[str] = Field(default_factory=list)
+    frequencyP95: float = 0
+    sampleCount: int = 0
+    activeDayCount: int = 0
+    confidence: Literal["low", "high"] = "low"
+    unknownFields: list[str] = Field(default_factory=list)
+    baselineVersion: str
+    createdAt: str
+
+
+class PolicySnapshot(BaseModel):
+    policyVersion: str
+    snapshotHash: str
+    rules: list[PolicyRule]
+
+
+class PolicyRuleResult(BaseModel):
+    ruleId: str
+    category: Literal["context", "action", "compound_sequence"]
+    state: RuleState
+    selected: bool = False
+    configuredPoints: int = Field(ge=0, le=100)
+    awardedPoints: int = Field(ge=0, le=100)
+    severityFloor: Optional[Literal["High", "Critical"]] = None
+    evidence: str
+    evidenceEventIds: list[str] = Field(default_factory=list)
+
+
+class PolicyEvaluation(BaseModel):
+    policyEvaluationId: str
+    policyVersion: str
+    policyScore: int = Field(ge=0, le=100)
+    severityFloor: Optional[Literal["High", "Critical"]] = None
+    severityFloorMinimum: Literal[0, 65, 85]
+    ruleResults: list[PolicyRuleResult]
+    snapshotHash: str
+
+
+class AIContextResponse(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    adjustment: AIAdjustment
+    confidence: float = Field(ge=0, le=1)
+    riskFactors: list[str]
+    mitigatingFactors: list[str]
+    evidenceEventIds: list[str]
+    explanation: str
+
+
+class AIContextDecision(BaseModel):
+    aiDecisionId: str
+    status: AIStatus
+    adjustmentRequested: Optional[int] = None
+    adjustmentApplied: AIAdjustment = 0
+    confidence: Optional[float] = None
+    riskFactors: list[str] = Field(default_factory=list)
+    mitigatingFactors: list[str] = Field(default_factory=list)
+    evidenceEventIds: list[str] = Field(default_factory=list)
+    explanation: str
+    validationErrors: list[str] = Field(default_factory=list)
+    model: Optional[str] = None
+    promptVersion: str
+
+
+class RiskCalculation(BaseModel):
+    policyScore: int = Field(ge=0, le=100)
+    aiAdjustmentApplied: AIAdjustment
+    preFloorScore: int = Field(ge=0, le=100)
+    severityFloorMinimum: Literal[0, 65, 85]
+    finalRiskScore: int = Field(ge=0, le=100)
+
+
+class RiskBaselineRef(BaseModel):
+    baselineId: str
+    confidence: Literal["low", "high"]
+
+
+class RiskAssessment(BaseModel):
+    assessmentId: str
+    eventId: str
+    baseline: RiskBaselineRef
+    policyEvaluation: PolicyEvaluation
+    aiContext: AIContextDecision
+    calculation: RiskCalculation
+    severity: Severity
+    scoringVersion: str
+    createdAt: str
+
+
+class RiskAssessmentRequest(BaseModel):
+    eventId: str
+    forceAiRefresh: bool = False
+
+
+class RiskAssessmentList(BaseModel):
+    assessments: list[RiskAssessment]
+
+
+class IdentityRiskSummary(BaseModel):
+    latestPolicyScore: Optional[int] = None
+    latestAiAdjustment: Optional[int] = None
+    latestAiStatus: Optional[AIStatus] = None
+    latestSeverityFloor: Optional[Literal["High", "Critical"]] = None
+    latestFinalRiskScore: Optional[int] = None
+    matchedPolicyIds: list[str] = Field(default_factory=list)
+
+
+class IdentityDetail(BaseModel):
+    identityId: str
+    name: str
+    identityType: Literal["human", "service", "workload"]
+    role: str
+    status: str
+    homeTimezone: str
+
+
+class IdentityProfileResponse(BaseModel):
+    identity: IdentityDetail
+    baseline: Optional[IdentityBaseline] = None
+    events: list[SecurityEvent]
+    assessments: list[RiskAssessment]
+    riskSummary: IdentityRiskSummary

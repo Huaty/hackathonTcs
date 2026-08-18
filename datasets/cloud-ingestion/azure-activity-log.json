@@ -1,0 +1,423 @@
+{
+  "records": [
+    {
+      "authorization": {
+        "action": "Microsoft.Compute/virtualMachines/read",
+        "scope": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/demo-security-rg/providers/Microsoft.Compute/virtualMachines/demo-vm"
+      },
+      "caller": "aisha.rahman@example.invalid",
+      "claims": {
+        "http://schemas.microsoft.com/identity/claims/objectidentifier": "aaaaaaaa-1111-4111-8111-aaaaaaaaaaaa",
+        "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name": "aisha.rahman@example.invalid",
+        "ipaddr": "198.51.100.20"
+      },
+      "correlationId": "azure-corr-001",
+      "eventDataId": "azure-evt-0001",
+      "eventName": {
+        "value": "EndRequest",
+        "localizedValue": "End request"
+      },
+      "category": {
+        "value": "Administrative",
+        "localizedValue": "Administrative"
+      },
+      "eventTimestamp": "2026-08-18T02:10:00Z",
+      "id": "/subscriptions/00000000-1111-2222-3333-444444444444/events/azure-evt-0001",
+      "level": "Informational",
+      "operationId": "azure-corr-001",
+      "operationName": {
+        "value": "Microsoft.Compute/virtualMachines/read",
+        "localizedValue": "Microsoft.Compute/virtualMachines/read"
+      },
+      "resourceGroupName": "demo-security-rg",
+      "resourceProviderName": {
+        "value": "Microsoft.Compute",
+        "localizedValue": "Microsoft.Compute"
+      },
+      "resourceType": {
+        "value": "Microsoft.Compute/virtualMachines",
+        "localizedValue": "Microsoft.Compute/virtualMachines"
+      },
+      "resourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/demo-security-rg/providers/Microsoft.Compute/virtualMachines/demo-vm",
+      "status": {
+        "value": "Succeeded",
+        "localizedValue": "Succeeded"
+      },
+      "subStatus": {
+        "value": "OK",
+        "localizedValue": "Succeeded"
+      },
+      "subscriptionId": "00000000-1111-2222-3333-444444444444",
+      "tenantId": "dddddddd-4444-4444-8444-dddddddddddd",
+      "properties": {
+        "demo": true
+      }
+    },
+    {
+      "authorization": {
+        "action": "Microsoft.Authorization/roleAssignments/write",
+        "scope": "/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.Authorization/roleAssignments/demo-role-assignment"
+      },
+      "caller": "aisha.rahman@example.invalid",
+      "claims": {
+        "http://schemas.microsoft.com/identity/claims/objectidentifier": "aaaaaaaa-1111-4111-8111-aaaaaaaaaaaa",
+        "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name": "aisha.rahman@example.invalid",
+        "ipaddr": "203.0.113.30"
+      },
+      "correlationId": "azure-corr-002",
+      "eventDataId": "azure-evt-0002",
+      "eventName": {
+        "value": "EndRequest",
+        "localizedValue": "End request"
+      },
+      "category": {
+        "value": "Administrative",
+        "localizedValue": "Administrative"
+      },
+      "eventTimestamp": "2026-08-18T02:20:00Z",
+      "id": "/subscriptions/00000000-1111-2222-3333-444444444444/events/azure-evt-0002",
+      "level": "Informational",
+      "operationId": "azure-corr-002",
+      "operationName": {
+        "value": "Microsoft.Authorization/roleAssignments/write",
+        "localizedValue": "Microsoft.Authorization/roleAssignments/write"
+      },
+      "resourceGroupName": "demo-security-rg",
+      "resourceProviderName": {
+        "value": "Microsoft.Authorization",
+        "localizedValue": "Microsoft.Authorization"
+      },
+      "resourceType": {
+        "value": "Microsoft.Authorization/roleAssignments",
+        "localizedValue": "Microsoft.Authorization/roleAssignments"
+      },
+      "resourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.Authorization/roleAssignments/demo-role-assignment",
+      "status": {
+        "value": "Succeeded",
+        "localizedValue": "Succeeded"
+      },
+      "subStatus": {
+        "value": "OK",
+        "localizedValue": "Succeeded"
+      },
+      "subscriptionId": "00000000-1111-2222-3333-444444444444",
+      "tenantId": "dddddddd-4444-4444-8444-dddddddddddd",
+      "properties": {
+        "demo": true
+      }
+    },
+    {
+      "authorization": {
+        "action": "Microsoft.Storage/storageAccounts/listKeys/action",
+        "scope": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/demo-security-rg/providers/Microsoft.Storage/storageAccounts/demostorage"
+      },
+      "caller": "demo-deploy@example.invalid",
+      "claims": {
+        "http://schemas.microsoft.com/identity/claims/objectidentifier": "cccccccc-3333-4333-8333-cccccccccccc",
+        "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name": "demo-deploy@example.invalid",
+        "ipaddr": "192.0.2.60"
+      },
+      "correlationId": "azure-corr-003",
+      "eventDataId": "azure-evt-0003",
+      "eventName": {
+        "value": "EndRequest",
+        "localizedValue": "End request"
+      },
+      "category": {
+        "value": "Administrative",
+        "localizedValue": "Administrative"
+      },
+      "eventTimestamp": "2026-08-18T02:25:00Z",
+      "id": "/subscriptions/00000000-1111-2222-3333-444444444444/events/azure-evt-0003",
+      "level": "Informational",
+      "operationId": "azure-corr-003",
+      "operationName": {
+        "value": "Microsoft.Storage/storageAccounts/listKeys/action",
+        "localizedValue": "Microsoft.Storage/storageAccounts/listKeys/action"
+      },
+      "resourceGroupName": "demo-security-rg",
+      "resourceProviderName": {
+        "value": "Microsoft.Storage",
+        "localizedValue": "Microsoft.Storage"
+      },
+      "resourceType": {
+        "value": "Microsoft.Storage/storageAccounts",
+        "localizedValue": "Microsoft.Storage/storageAccounts"
+      },
+      "resourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/demo-security-rg/providers/Microsoft.Storage/storageAccounts/demostorage",
+      "status": {
+        "value": "Succeeded",
+        "localizedValue": "Succeeded"
+      },
+      "subStatus": {
+        "value": "OK",
+        "localizedValue": "Succeeded"
+      },
+      "subscriptionId": "00000000-1111-2222-3333-444444444444",
+      "tenantId": "dddddddd-4444-4444-8444-dddddddddddd",
+      "properties": {
+        "demo": true
+      }
+    },
+    {
+      "authorization": {
+        "action": "Microsoft.Insights/diagnosticSettings/delete",
+        "scope": "/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.Insights/diagnosticSettings/demo-audit"
+      },
+      "caller": "aisha.rahman@example.invalid",
+      "claims": {
+        "http://schemas.microsoft.com/identity/claims/objectidentifier": "aaaaaaaa-1111-4111-8111-aaaaaaaaaaaa",
+        "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name": "aisha.rahman@example.invalid",
+        "ipaddr": "203.0.113.30"
+      },
+      "correlationId": "azure-corr-004",
+      "eventDataId": "azure-evt-0004",
+      "eventName": {
+        "value": "EndRequest",
+        "localizedValue": "End request"
+      },
+      "category": {
+        "value": "Administrative",
+        "localizedValue": "Administrative"
+      },
+      "eventTimestamp": "2026-08-18T02:30:00Z",
+      "id": "/subscriptions/00000000-1111-2222-3333-444444444444/events/azure-evt-0004",
+      "level": "Informational",
+      "operationId": "azure-corr-004",
+      "operationName": {
+        "value": "Microsoft.Insights/diagnosticSettings/delete",
+        "localizedValue": "Microsoft.Insights/diagnosticSettings/delete"
+      },
+      "resourceGroupName": "demo-security-rg",
+      "resourceProviderName": {
+        "value": "Microsoft.Insights",
+        "localizedValue": "Microsoft.Insights"
+      },
+      "resourceType": {
+        "value": "Microsoft.Insights/diagnosticSettings",
+        "localizedValue": "Microsoft.Insights/diagnosticSettings"
+      },
+      "resourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.Insights/diagnosticSettings/demo-audit",
+      "status": {
+        "value": "Succeeded",
+        "localizedValue": "Succeeded"
+      },
+      "subStatus": {
+        "value": "OK",
+        "localizedValue": "Succeeded"
+      },
+      "subscriptionId": "00000000-1111-2222-3333-444444444444",
+      "tenantId": "dddddddd-4444-4444-8444-dddddddddddd",
+      "properties": {
+        "demo": true
+      }
+    },
+    {
+      "authorization": {
+        "action": "Microsoft.Compute/virtualMachines/start/action",
+        "scope": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/demo-security-rg/providers/Microsoft.Compute/virtualMachines/demo-vm"
+      },
+      "caller": "marco.silva@example.invalid",
+      "claims": {
+        "http://schemas.microsoft.com/identity/claims/objectidentifier": "bbbbbbbb-2222-4222-8222-bbbbbbbbbbbb",
+        "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name": "marco.silva@example.invalid"
+      },
+      "correlationId": null,
+      "eventDataId": "azure-evt-0005",
+      "eventName": {
+        "value": "EndRequest",
+        "localizedValue": "End request"
+      },
+      "category": {
+        "value": "Administrative",
+        "localizedValue": "Administrative"
+      },
+      "eventTimestamp": "2026-08-18T02:35:00Z",
+      "id": "/subscriptions/00000000-1111-2222-3333-444444444444/events/azure-evt-0005",
+      "level": "Informational",
+      "operationId": null,
+      "operationName": {
+        "value": "Microsoft.Compute/virtualMachines/start/action",
+        "localizedValue": "Microsoft.Compute/virtualMachines/start/action"
+      },
+      "resourceGroupName": "demo-security-rg",
+      "resourceProviderName": {
+        "value": "Microsoft.Compute",
+        "localizedValue": "Microsoft.Compute"
+      },
+      "resourceType": {
+        "value": "Microsoft.Compute/virtualMachines",
+        "localizedValue": "Microsoft.Compute/virtualMachines"
+      },
+      "resourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/demo-security-rg/providers/Microsoft.Compute/virtualMachines/demo-vm",
+      "status": {
+        "value": "Succeeded",
+        "localizedValue": "Succeeded"
+      },
+      "subStatus": {
+        "value": "OK",
+        "localizedValue": "Succeeded"
+      },
+      "subscriptionId": "00000000-1111-2222-3333-444444444444",
+      "tenantId": "dddddddd-4444-4444-8444-dddddddddddd",
+      "properties": {
+        "demo": true
+      }
+    },
+    {
+      "authorization": {
+        "action": "Microsoft.Compute/virtualMachines/read",
+        "scope": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/demo-security-rg/providers/Microsoft.Compute/virtualMachines/demo-vm"
+      },
+      "caller": "aisha.rahman@example.invalid",
+      "claims": {
+        "http://schemas.microsoft.com/identity/claims/objectidentifier": "aaaaaaaa-1111-4111-8111-aaaaaaaaaaaa",
+        "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name": "aisha.rahman@example.invalid",
+        "ipaddr": "198.51.100.20"
+      },
+      "correlationId": "azure-corr-001",
+      "eventDataId": "azure-evt-0001",
+      "eventName": {
+        "value": "EndRequest",
+        "localizedValue": "End request"
+      },
+      "category": {
+        "value": "Administrative",
+        "localizedValue": "Administrative"
+      },
+      "eventTimestamp": "2026-08-18T02:10:00Z",
+      "id": "/subscriptions/00000000-1111-2222-3333-444444444444/events/azure-evt-0001",
+      "level": "Informational",
+      "operationId": "azure-corr-001",
+      "operationName": {
+        "value": "Microsoft.Compute/virtualMachines/read",
+        "localizedValue": "Microsoft.Compute/virtualMachines/read"
+      },
+      "resourceGroupName": "demo-security-rg",
+      "resourceProviderName": {
+        "value": "Microsoft.Compute",
+        "localizedValue": "Microsoft.Compute"
+      },
+      "resourceType": {
+        "value": "Microsoft.Compute/virtualMachines",
+        "localizedValue": "Microsoft.Compute/virtualMachines"
+      },
+      "resourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/demo-security-rg/providers/Microsoft.Compute/virtualMachines/demo-vm",
+      "status": {
+        "value": "Succeeded",
+        "localizedValue": "Succeeded"
+      },
+      "subStatus": {
+        "value": "OK",
+        "localizedValue": "Succeeded"
+      },
+      "subscriptionId": "00000000-1111-2222-3333-444444444444",
+      "tenantId": "dddddddd-4444-4444-8444-dddddddddddd",
+      "properties": {
+        "demo": true
+      }
+    },
+    {
+      "authorization": {
+        "action": "Microsoft.Compute/virtualMachines/read",
+        "scope": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/demo-security-rg/providers/Microsoft.Compute/virtualMachines/demo-vm"
+      },
+      "caller": "unmapped.user@example.invalid",
+      "claims": {
+        "http://schemas.microsoft.com/identity/claims/objectidentifier": "eeeeeeee-5555-4555-8555-eeeeeeeeeeee",
+        "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name": "unmapped.user@example.invalid",
+        "ipaddr": "192.0.2.61"
+      },
+      "correlationId": "azure-corr-006",
+      "eventDataId": "azure-evt-0006",
+      "eventName": {
+        "value": "EndRequest",
+        "localizedValue": "End request"
+      },
+      "category": {
+        "value": "Administrative",
+        "localizedValue": "Administrative"
+      },
+      "eventTimestamp": "2026-08-18T02:40:00Z",
+      "id": "/subscriptions/00000000-1111-2222-3333-444444444444/events/azure-evt-0006",
+      "level": "Informational",
+      "operationId": "azure-corr-006",
+      "operationName": {
+        "value": "Microsoft.Compute/virtualMachines/read",
+        "localizedValue": "Microsoft.Compute/virtualMachines/read"
+      },
+      "resourceGroupName": "demo-security-rg",
+      "resourceProviderName": {
+        "value": "Microsoft.Compute",
+        "localizedValue": "Microsoft.Compute"
+      },
+      "resourceType": {
+        "value": "Microsoft.Compute/virtualMachines",
+        "localizedValue": "Microsoft.Compute/virtualMachines"
+      },
+      "resourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/demo-security-rg/providers/Microsoft.Compute/virtualMachines/demo-vm",
+      "status": {
+        "value": "Succeeded",
+        "localizedValue": "Succeeded"
+      },
+      "subStatus": {
+        "value": "OK",
+        "localizedValue": "Succeeded"
+      },
+      "subscriptionId": "00000000-1111-2222-3333-444444444444",
+      "tenantId": "dddddddd-4444-4444-8444-dddddddddddd",
+      "properties": {
+        "demo": true
+      }
+    },
+    {
+      "authorization": {
+        "action": "Microsoft.Compute/virtualMachines/read",
+        "scope": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/demo-security-rg/providers/Microsoft.Compute/virtualMachines/demo-vm"
+      },
+      "caller": "aisha.rahman@example.invalid",
+      "claims": {
+        "http://schemas.microsoft.com/identity/claims/objectidentifier": "aaaaaaaa-1111-4111-8111-aaaaaaaaaaaa",
+        "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name": "aisha.rahman@example.invalid",
+        "ipaddr": "198.51.100.20"
+      },
+      "correlationId": "azure-corr-007",
+      "eventDataId": "azure-evt-0007",
+      "eventName": {
+        "value": "EndRequest",
+        "localizedValue": "End request"
+      },
+      "category": {
+        "value": "Administrative",
+        "localizedValue": "Administrative"
+      },
+      "eventTimestamp": "2026-08-18T02:45:00Z",
+      "id": "/subscriptions/00000000-1111-2222-3333-444444444444/events/azure-evt-0007",
+      "level": "Informational",
+      "operationId": "azure-corr-007",
+      "resourceGroupName": "demo-security-rg",
+      "resourceProviderName": {
+        "value": "Microsoft.Compute",
+        "localizedValue": "Microsoft.Compute"
+      },
+      "resourceType": {
+        "value": "Microsoft.Compute/virtualMachines",
+        "localizedValue": "Microsoft.Compute/virtualMachines"
+      },
+      "resourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/demo-security-rg/providers/Microsoft.Compute/virtualMachines/demo-vm",
+      "status": {
+        "value": "Succeeded",
+        "localizedValue": "Succeeded"
+      },
+      "subStatus": {
+        "value": "OK",
+        "localizedValue": "Succeeded"
+      },
+      "subscriptionId": "00000000-1111-2222-3333-444444444444",
+      "tenantId": "dddddddd-4444-4444-8444-dddddddddddd",
+      "properties": {
+        "demo": true
+      }
+    }
+  ]
+}

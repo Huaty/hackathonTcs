@@ -1,6 +1,9 @@
+# SQLite storage (003-sqlite-storage) uses Python's stdlib sqlite3 module — no new package needed.
 fastapi>=0.115
 uvicorn[standard]>=0.30
 pydantic>=2.7
 python-multipart>=0.0.9
 pytest>=8.0
 httpx>=0.27
+python-dotenv>=1.0
+truststore>=0.9

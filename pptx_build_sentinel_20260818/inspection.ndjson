@@ -1,0 +1,174 @@
+{"kind":"slide","id":"sl/km2tgf","slide":1,"title":"HACKATHON PROJECT · CLOUD ACCESS SECURITY","textShapes":7}
+{"kind":"textbox","id":"sh/7ip476ts","slide":1,"textChars":41,"textLines":1}
+{"kind":"shape","id":"sh/8jy50bad","slide":1,"name":"cover-signal","bbox":[56,136,18,336]}
+{"kind":"textbox","id":"sh/947m9gbi","slide":1,"textChars":15,"textLines":2}
+{"kind":"textbox","id":"sh/ydw3u1sv","slide":1,"textChars":58,"textLines":2}
+{"kind":"shape","id":"sh/ze5436tg","slide":1,"name":"cover-rule","bbox":[820,126,356,0]}
+{"kind":"textbox","id":"sh/0fylwra1","slide":1,"textChars":6,"textLines":1}
+{"kind":"textbox","id":"sh/lg7m5wbm","slide":1,"textChars":8,"textLines":1}
+{"kind":"textbox","id":"sh/i90n6lsf","slide":1,"textChars":6,"textLines":1}
+{"kind":"textbox","id":"sh/ja94fq90","slide":1,"textChars":111,"textLines":1}
+{"kind":"notes","id":"nt/km2tgf","slide":1,"text":"[Sources] | - sentinel-access/CONTEXT.md | - sentinel-access/ideas.md"}
+{"kind":"slide","id":"sl/au9v6u","slide":2,"title":"PROBLEM STATEMENT","textShapes":14}
+{"kind":"textbox","id":"sh/25g3yton","slide":2,"textChars":17,"textLines":1}
+{"kind":"textbox","id":"sh/p8r29one","slide":2,"textChars":42,"textLines":1}
+{"kind":"shape","id":"sh/o7il0j6t","slide":2,"name":"header-rule-2","bbox":[56,156,1168,0]}
+{"kind":"textbox","id":"sh/f2pk3e5c","slide":2,"textChars":2,"textLines":1}
+{"kind":"textbox","id":"sh/e1g3u9or","slide":2,"textChars":70,"textLines":3}
+{"kind":"textbox","id":"sh/14725on2","slide":2,"textChars":143,"textLines":1}
+{"kind":"shape","id":"sh/03ylwj6h","slide":2,"name":"problem-rule-0","bbox":[674,188,550,0]}
+{"kind":"textbox","id":"sh/zyt4fy5g","slide":2,"textChars":2,"textLines":1}
+{"kind":"textbox","id":"sh/yx036d4v","slide":2,"textChars":20,"textLines":1}
+{"kind":"textbox","id":"sh/gzul4zqx","slide":2,"textChars":76,"textLines":1}
+{"kind":"shape","id":"sh/h032d47i","slide":2,"name":"problem-rule-1","bbox":[674,324,550,0]}
+{"kind":"textbox","id":"sh/uxc32p87","slide":2,"textChars":2,"textLines":1}
+{"kind":"textbox","id":"sh/fylkbupc","slide":2,"textChars":21,"textLines":1}
+{"kind":"textbox","id":"sh/sval0fq1","slide":2,"textChars":72,"textLines":1}
+{"kind":"shape","id":"sh/twj29k7m","slide":2,"name":"problem-rule-2","bbox":[674,460,550,0]}
+{"kind":"textbox","id":"sh/69sjyp8v","slide":2,"textChars":2,"textLines":1}
+{"kind":"textbox","id":"sh/7a1k7apg","slide":2,"textChars":18,"textLines":1}
+{"kind":"textbox","id":"sh/k7a1wfqp","slide":2,"textChars":79,"textLines":1}
+{"kind":"notes","id":"nt/au9v6u","slide":2,"text":"[Sources] | - sentinel-access/CONTEXT.md | - specs/004-contextual-risk-scorin..."}
+{"kind":"slide","id":"sl/fb1auh","slide":3,"title":"APPROACH & SOLUTION ARCHITECTURE","textShapes":14}
+{"kind":"textbox","id":"sh/zi1kbi9g","slide":3,"textChars":32,"textLines":1}
+{"kind":"textbox","id":"sh/k3a1knq1","slide":3,"textChars":43,"textLines":1}
+{"kind":"shape","id":"sh/l4j2dsr6","slide":3,"name":"header-rule-3","bbox":[56,156,1168,0]}
+{"kind":"textbox","id":"sh/ad8jed8j","slide":3,"textChars":2,"textLines":1}
+{"kind":"shape","id":"sh/behk7y94","slide":3,"name":"solution-link-0","bbox":[302,352,52,0]}
+{"kind":"shape","id":"sh/cfq1g3qp","slide":3,"name":"solution-chevron-0","bbox":[320,342,20,20]}
+{"kind":"shape","id":"sh/xgj298ra","slide":3,"name":"solution-link-1","bbox":[600,352,52,0]}
+{"kind":"shape","id":"sh/298jat8n","slide":3,"name":"solution-chevron-1","bbox":[618,342,20,20]}
+{"kind":"shape","id":"sh/nahk3y98","slide":3,"name":"solution-link-2","bbox":[898,352,52,0]}
+{"kind":"shape","id":"sh/by1wnehc","slide":3,"name":"solution-chevron-2","bbox":[916,342,20,20]}
+{"kind":"shape","id":"sh/axsvu90r","slide":3,"name":"solution-1-box","bbox":[56,236,246,232]}
+{"kind":"textbox","id":"sh/x0jep4z2","slide":3,"textChars":10,"textLines":1}
+{"kind":"textbox","id":"sh/czadwjih","slide":3,"textChars":55,"textLines":1}
+{"kind":"shape","id":"sh/z2lwreh8","slide":3,"name":"solution-2-box","bbox":[354,236,246,232]}
+{"kind":"textbox","id":"sh/y1cfy90n","slide":3,"textChars":11,"textLines":1}
+{"kind":"textbox","id":"sh/l43etoze","slide":3,"textChars":60,"textLines":1}
+{"kind":"shape","id":"sh/k3ux0jit","slide":3,"name":"solution-3-box","bbox":[652,236,246,232]}
+{"kind":"textbox","id":"sh/f6hwfu14","slide":3,"textChars":10,"textLines":1}
+{"kind":"textbox","id":"sh/e58vmp0j","slide":3,"textChars":58,"textLines":1}
+{"kind":"shape","id":"sh/i1gzuxk7","slide":3,"name":"solution-4-box","bbox":[950,236,246,232]}
+{"kind":"textbox","id":"sh/j2pgn21c","slide":3,"textChars":7,"textLines":1}
+{"kind":"textbox","id":"sh/4nyhw72x","slide":3,"textChars":55,"textLines":1}
+{"kind":"textbox","id":"sh/5o7ipsji","slide":3,"textChars":22,"textLines":1}
+{"kind":"textbox","id":"sh/uxwzqdkv","slide":3,"textChars":27,"textLines":1}
+{"kind":"shape","id":"sh/vy5gji1g","slide":3,"name":"solution-outcome-box","bbox":[56,558,1140,66]}
+{"kind":"textbox","id":"sh/wzehsn21","slide":3,"textChars":87,"textLines":1}
+{"kind":"notes","id":"nt/fb1auh","slide":3,"text":"[Sources] | - sentinel-access/backend/app/routers/datasets.py | - sentinel-ac..."}
+{"kind":"slide","id":"sl/cmfoeh","slide":4,"title":"HIGH-LEVEL TECHNICAL ARCHITECTURE","textShapes":21}
+{"kind":"textbox","id":"sh/wbatwv6t","slide":4,"textChars":33,"textLines":1}
+{"kind":"textbox","id":"sh/va1cnqp8","slide":4,"textChars":49,"textLines":1}
+{"kind":"shape","id":"sh/a9sbulon","slide":4,"name":"header-rule-4","bbox":[56,156,1168,0]}
+{"kind":"textbox","id":"sh/5g3ut07a","slide":4,"textChars":2,"textLines":1}
+{"kind":"shape","id":"sh/kfud0v6p","slide":4,"name":"tech-link-0","bbox":[294,344,40,0]}
+{"kind":"shape","id":"sh/je1crqp4","slide":4,"name":"tech-chevron-0","bbox":[310,334,18,18]}
+{"kind":"shape","id":"sh/idsbyloj","slide":4,"name":"tech-link-1","bbox":[602,344,40,0]}
+{"kind":"shape","id":"sh/t43uxk76","slide":4,"name":"tech-chevron-1","bbox":[618,334,18,18]}
+{"kind":"shape","id":"sh/s3ud4f61","slide":4,"name":"tech-link-2","bbox":[896,344,40,0]}
+{"kind":"shape","id":"sh/mlkzipgj","slide":4,"name":"tech-chevron-2","bbox":[912,334,18,18]}
+{"kind":"shape","id":"sh/nmt0rux4","slide":4,"name":"tech-planned-link","bbox":[174,438,0,46]}
+{"kind":"textbox","id":"sh/8n2hkzyp","slide":4,"textChars":9,"textLines":1}
+{"kind":"shape","id":"sh/98bit4fa","slide":4,"name":"tech-upload","bbox":[56,250,238,188]}
+{"kind":"textbox","id":"sh/a9kjm9gv","slide":4,"textChars":20,"textLines":1}
+{"kind":"textbox","id":"sh/vat0vux0","slide":4,"textChars":31,"textLines":2}
+{"kind":"shape","id":"sh/wbm1ozyl","slide":4,"name":"tech-cloud","bbox":[56,484,238,132]}
+{"kind":"textbox","id":"sh/xcvix4f6","slide":4,"textChars":37,"textLines":3}
+{"kind":"textbox","id":"sh/qd0za5gb","slide":4,"textChars":13,"textLines":1}
+{"kind":"shape","id":"sh/re90jaxw","slide":4,"name":"tech-fastapi","bbox":[334,250,268,188]}
+{"kind":"textbox","id":"sh/fy5wr6do","slide":4,"textChars":7,"textLines":1}
+{"kind":"textbox","id":"sh/uxwfi1w3","slide":4,"textChars":79,"textLines":1}
+{"kind":"shape","id":"sh/hknetgvu","slide":4,"name":"tech-sqlite","bbox":[334,466,268,150]}
+{"kind":"textbox","id":"sh/gjexkbe9","slide":4,"textChars":14,"textLines":1}
+{"kind":"textbox","id":"sh/7u5wnmds","slide":4,"textChars":60,"textLines":3}
+{"kind":"textbox","id":"sh/6twfe1w7","slide":4,"textChars":8,"textLines":1}
+{"kind":"shape","id":"sh/twnepwvi","slide":4,"name":"tech-litellm","bbox":[642,250,254,188]}
+{"kind":"textbox","id":"sh/svexgred","slide":4,"textChars":7,"textLines":1}
+{"kind":"textbox","id":"sh/rqpgzqdw","slide":4,"textChars":45,"textLines":2}
+{"kind":"shape","id":"sh/qpgfqlwb","slide":4,"name":"tech-ai-features","bbox":[642,466,254,150]}
+{"kind":"textbox","id":"sh/8vatknut","slide":4,"textChars":15,"textLines":1}
+{"kind":"textbox","id":"sh/9wjudsbe","slide":4,"textChars":49,"textLines":3}
+{"kind":"textbox","id":"sh/mt8bidcn","slide":4,"textChars":18,"textLines":1}
+{"kind":"shape","id":"sh/nu1cbit8","slide":4,"name":"tech-react","bbox":[936,250,288,366]}
+{"kind":"textbox","id":"sh/wzadonu5","slide":4,"textChars":12,"textLines":1}
+{"kind":"textbox","id":"sh/x0juhsba","slide":4,"textChars":82,"textLines":5}
+{"kind":"textbox","id":"sh/axsbmxcz","slide":4,"textChars":31,"textLines":1}
+{"kind":"notes","id":"nt/cmfoeh","slide":4,"text":"[Sources] | - sentinel-access/package.json | - sentinel-access/backend/app/ma..."}
+{"kind":"slide","id":"sl/y0h6ag","slide":5,"title":"AI / ML COMPONENTS","textShapes":14}
+{"kind":"textbox","id":"sh/r6pwzqtw","slide":5,"textChars":18,"textLines":1}
+{"kind":"textbox","id":"sh/s7ydsvah","slide":5,"textChars":43,"textLines":1}
+{"kind":"shape","id":"sh/t87e10b2","slide":5,"name":"header-rule-5","bbox":[56,156,1168,0]}
+{"kind":"textbox","id":"sh/etgvu5sn","slide":5,"textChars":2,"textLines":1}
+{"kind":"shape","id":"sh/fupw3at8","slide":5,"name":"ai-top-rule-0","bbox":[56,220,344,0]}
+{"kind":"textbox","id":"sh/gvydwfat","slide":5,"textChars":11,"textLines":1}
+{"kind":"textbox","id":"sh/1w7e50by","slide":5,"textChars":20,"textLines":1}
+{"kind":"textbox","id":"sh/2xgvy5sj","slide":5,"textChars":116,"textLines":1}
+{"kind":"shape","id":"sh/3y9w7at4","slide":5,"name":"ai-top-rule-1","bbox":[440,220,344,0]}
+{"kind":"textbox","id":"sh/jmtw7qhw","slide":5,"textChars":11,"textLines":1}
+{"kind":"textbox","id":"sh/ylkfylgb","slide":5,"textChars":20,"textLines":1}
+{"kind":"textbox","id":"sh/lobe9gzm","slide":5,"textChars":127,"textLines":1}
+{"kind":"shape","id":"sh/kn2x0by1","slide":5,"name":"ai-top-rule-2","bbox":[824,220,344,0]}
+{"kind":"textbox","id":"sh/bytw36hk","slide":5,"textChars":11,"textLines":1}
+{"kind":"textbox","id":"sh/ax0vu1gz","slide":5,"textChars":17,"textLines":1}
+{"kind":"textbox","id":"sh/xkbe5gzq","slide":5,"textChars":107,"textLines":1}
+{"kind":"shape","id":"sh/wz2dwby5","slide":5,"name":"ai-guardrail","bbox":[56,556,1112,82]}
+{"kind":"textbox","id":"sh/vudwfaho","slide":5,"textChars":33,"textLines":1}
+{"kind":"textbox","id":"sh/ut4f65gj","slide":5,"textChars":102,"textLines":1}
+{"kind":"notes","id":"nt/y0h6ag","slide":5,"text":"[Sources] | - sentinel-access/backend/app/routers/command_center.py | - senti..."}
+{"kind":"slide","id":"sl/ohxirs","slide":6,"title":"INNOVATION & CREATIVITY","textShapes":15}
+{"kind":"textbox","id":"sh/36l07idw","slide":6,"textChars":23,"textLines":1}
+{"kind":"textbox","id":"sh/o7u10neh","slide":6,"textChars":47,"textLines":1}
+{"kind":"shape","id":"sh/p83i9sv2","slide":6,"name":"header-rule-6","bbox":[56,156,1168,0]}
+{"kind":"textbox","id":"sh/e1sjutwf","slide":6,"textChars":2,"textLines":1}
+{"kind":"shape","id":"sh/f2l03yd0","slide":6,"name":"innov-rule-01","bbox":[56,218,520,0]}
+{"kind":"textbox","id":"sh/g3u1w3el","slide":6,"textChars":2,"textLines":1}
+{"kind":"textbox","id":"sh/143i58vq","slide":6,"textChars":21,"textLines":1}
+{"kind":"textbox","id":"sh/yxwj6xwj","slide":6,"textChars":102,"textLines":1}
+{"kind":"shape","id":"sh/zy5kf2d4","slide":6,"name":"innov-rule-02","bbox":[650,218,520,0]}
+{"kind":"textbox","id":"sh/769gvy9k","slide":6,"textChars":2,"textLines":1}
+{"kind":"textbox","id":"sh/650f2t8z","slide":6,"textChars":24,"textLines":1}
+{"kind":"textbox","id":"sh/t8ryxo7q","slide":6,"textChars":111,"textLines":1}
+{"kind":"shape","id":"sh/s7ix4jq5","slide":6,"name":"innov-rule-03","bbox":[56,432,520,0]}
+{"kind":"textbox","id":"sh/futgzypw","slide":6,"textChars":2,"textLines":1}
+{"kind":"textbox","id":"sh/utkf6t8b","slide":6,"textChars":20,"textLines":1}
+{"kind":"textbox","id":"sh/hwby187m","slide":6,"textChars":118,"textLines":1}
+{"kind":"shape","id":"sh/gv2x83qh","slide":6,"name":"innov-rule-04","bbox":[650,432,520,0]}
+{"kind":"textbox","id":"sh/3ytg3ips","slide":6,"textChars":2,"textLines":1}
+{"kind":"textbox","id":"sh/2xkzad87","slide":6,"textChars":17,"textLines":1}
+{"kind":"textbox","id":"sh/y58ri1wr","slide":6,"textChars":125,"textLines":1}
+{"kind":"notes","id":"nt/ohxirs","slide":6,"text":"[Sources] | - sentinel-access/ideas.md | - sentinel-access/CONTEXT.md | - spe..."}
+{"kind":"slide","id":"sl/jy8veq","slide":7,"title":"SCALABILITY FOR FUTURE EXPANSION","textShapes":13}
+{"kind":"textbox","id":"sh/lo76xs32","slide":7,"textChars":32,"textLines":1}
+{"kind":"textbox","id":"sh/ylg72x4b","slide":7,"textChars":44,"textLines":1}
+{"kind":"shape","id":"sh/zmpov2lw","slide":7,"name":"header-rule-7","bbox":[56,156,1168,0]}
+{"kind":"textbox","id":"sh/cjep0nm5","slide":7,"textChars":2,"textLines":1}
+{"kind":"shape","id":"sh/xk76ts3q","slide":7,"name":"scale-line","bbox":[104,340,1030,0]}
+{"kind":"shape","id":"sh/qhw7yd4f","slide":7,"name":"scale-dot-0","bbox":[116,330,20,20]}
+{"kind":"shape","id":"sh/bi5oril0","slide":7,"name":"scale-dot-1","bbox":[486,330,20,20]}
+{"kind":"shape","id":"sh/ovepw3m9","slide":7,"name":"scale-dot-2","bbox":[856,330,20,20]}
+{"kind":"textbox","id":"sh/pgn6p83u","slide":7,"textChars":19,"textLines":1}
+{"kind":"textbox","id":"sh/lcrmlkby","slide":7,"textChars":19,"textLines":1}
+{"kind":"textbox","id":"sh/kby5sfad","slide":7,"textChars":18,"textLines":1}
+{"kind":"textbox","id":"sh/jap4jats","slide":7,"textChars":25,"textLines":1}
+{"kind":"textbox","id":"sh/y9gnq5s7","slide":7,"textChars":60,"textLines":3}
+{"kind":"textbox","id":"sh/x87mh0bm","slide":7,"textChars":21,"textLines":1}
+{"kind":"textbox","id":"sh/w7y5ova1","slide":7,"textChars":79,"textLines":3}
+{"kind":"textbox","id":"sh/b6p4fqtg","slide":7,"textChars":23,"textLines":1}
+{"kind":"textbox","id":"sh/a5g3m5sb","slide":7,"textChars":81,"textLines":3}
+{"kind":"textbox","id":"sh/94nmd0bq","slide":7,"textChars":116,"textLines":1}
+{"kind":"notes","id":"nt/jy8veq","slide":7,"text":"[Sources] | - specs/005-cloud-log-ingestion/plan.md | - specs/004-contextual-..."}
+{"kind":"slide","id":"sl/uz95j3","slide":8,"title":"WHY SENTINEL ACCESS","textShapes":9}
+{"kind":"textbox","id":"sh/sbalw3mp","slide":8,"textChars":19,"textLines":1}
+{"kind":"textbox","id":"sh/7a143y54","slide":8,"textChars":45,"textLines":2}
+{"kind":"shape","id":"sh/69s3ut4j","slide":8,"name":"close-main-rule","bbox":[56,368,1168,0]}
+{"kind":"textbox","id":"sh/58jm1ony","slide":8,"textChars":5,"textLines":1}
+{"kind":"textbox","id":"sh/k7alsjmd","slide":8,"textChars":106,"textLines":1}
+{"kind":"textbox","id":"sh/j6h4ze58","slide":8,"textChars":7,"textLines":1}
+{"kind":"textbox","id":"sh/il83q94n","slide":8,"textChars":94,"textLines":1}
+{"kind":"textbox","id":"sh/p43mxsni","slide":8,"textChars":10,"textLines":1}
+{"kind":"textbox","id":"sh/o3u54nmx","slide":8,"textChars":100,"textLines":1}
+{"kind":"shape","id":"sh/ap4fy1kr","slide":8,"name":"close-accent","bbox":[1058,88,166,166]}
+{"kind":"textbox","id":"sh/bqdg76lc","slide":8,"textChars":17,"textLines":3}
+{"kind":"notes","id":"nt/uz95j3","slide":8,"text":"[Sources] | - sentinel-access/backend/app/main.py | - sentinel-access/backend..."}
+{"kind":"notice","message":"Truncated: omitted 0 lines. Increase maxChars or narrow target."}

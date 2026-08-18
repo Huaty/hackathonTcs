@@ -9,7 +9,6 @@
     "totalActivitiesChecked": 1482,
     "dataSourcesNormalized": 8
   },
-
   "summaryMetrics": {
     "activitiesChecked": 1482,
     "needsAttention": 17,
@@ -21,7 +20,6 @@
     "signalConfidencePct": 94.2,
     "identityCoveragePct": 87
   },
-
   "alerts": [
     {
       "id": "ALT-2841",
@@ -35,7 +33,12 @@
       "score": 96,
       "time": "08:42 UTC",
       "description": "A privileged console session originated from a new anonymizing network shortly after a successful session in Singapore.",
-      "signals": ["New ASN", "11,240 km in 39 min", "AssumeRole to Admin", "Outside peer baseline"],
+      "signals": [
+        "New ASN",
+        "11,240 km in 39 min",
+        "AssumeRole to Admin",
+        "Outside peer baseline"
+      ],
       "baseline": "Aisha typically signs in from Singapore on weekdays between 08:00-19:00 UTC and has not used this ASN in the past 90 days.",
       "recommended": "Require step-up authentication and review the created access key before allowing further privilege changes.",
       "status": null
@@ -52,7 +55,12 @@
       "score": 89,
       "time": "08:31 UTC",
       "description": "The deployment identity read 28 secrets outside its normal release window.",
-      "signals": ["5.6x normal volume", "New secret path", "Weekend pattern", "No change ticket"],
+      "signals": [
+        "5.6x normal volume",
+        "New secret path",
+        "Weekend pattern",
+        "No change ticket"
+      ],
       "baseline": "This workload normally retrieves 4-6 scoped secrets only during the 02:00 UTC release window.",
       "recommended": "Compare the task definition with the latest approved deployment and rotate any unneeded credentials.",
       "status": null
@@ -69,7 +77,11 @@
       "score": 81,
       "time": "08:04 UTC",
       "description": "An account inactive for 63 days signed in and enumerated production storage containers.",
-      "signals": ["Dormant 63 days", "First managed device", "Storage enumeration"],
+      "signals": [
+        "Dormant 63 days",
+        "First managed device",
+        "Storage enumeration"
+      ],
       "baseline": "Noah's identity has no recorded activity since the contractor offboarding review in June.",
       "recommended": "Validate current employment status and terminate active refresh tokens if access is no longer required.",
       "status": null
@@ -86,7 +98,11 @@
       "score": 67,
       "time": "07:46 UTC",
       "description": "A personal access token performed repository administration from an unseen country.",
-      "signals": ["New country", "PAT usage", "Repository settings"],
+      "signals": [
+        "New country",
+        "PAT usage",
+        "Repository settings"
+      ],
       "baseline": "Maya's prior 30-day access is limited to London and Amsterdam through managed devices.",
       "recommended": "Confirm travel, inspect the token's scope, and revoke it if it was not intentionally used.",
       "status": null
@@ -103,58 +119,173 @@
       "score": 61,
       "time": "07:15 UTC",
       "description": "An S3 bucket policy change was performed shortly after a denied service-control-policy action.",
-      "signals": ["Denied action sequence", "Out-of-window change", "Sensitive resource"],
+      "signals": [
+        "Denied action sequence",
+        "Out-of-window change",
+        "Sensitive resource"
+      ],
       "baseline": "Samir's policy changes usually occur through CI with linked change records, not the console.",
       "recommended": "Compare the policy version with the approved infrastructure-as-code change and document the exception.",
       "status": null
     }
   ],
-
   "modelRationale": {
     "topFindingId": "ALT-2841",
     "explanation": "The strongest signal is not a single unusual event. It is the sequence: an unfamiliar network, an impossible geography transition, and an immediate privilege change.",
     "signals": [
-      { "label": "Identity deviation", "score": 96, "tone": "#ff5962" },
-      { "label": "Access sequence", "score": 91, "tone": "#f5ae45" },
-      { "label": "Asset sensitivity", "score": 82, "tone": "#94a4b5" },
-      { "label": "Peer-group variance", "score": 76, "tone": "#39e0c5" }
+      {
+        "label": "Identity deviation",
+        "score": 96,
+        "tone": "#ff5962"
+      },
+      {
+        "label": "Access sequence",
+        "score": 91,
+        "tone": "#f5ae45"
+      },
+      {
+        "label": "Asset sensitivity",
+        "score": 82,
+        "tone": "#94a4b5"
+      },
+      {
+        "label": "Peer-group variance",
+        "score": 76,
+        "tone": "#39e0c5"
+      }
     ]
   },
-
   "accessTrend": [
-    { "label": "00", "events": 116, "anomalies": 3 },
-    { "label": "03", "events": 94, "anomalies": 2 },
-    { "label": "06", "events": 126, "anomalies": 4 },
-    { "label": "09", "events": 226, "anomalies": 11 },
-    { "label": "12", "events": 284, "anomalies": 9 },
-    { "label": "15", "events": 249, "anomalies": 6 },
-    { "label": "18", "events": 314, "anomalies": 13 },
-    { "label": "21", "events": 180, "anomalies": 5 }
+    {
+      "label": "00",
+      "events": 116,
+      "anomalies": 3
+    },
+    {
+      "label": "03",
+      "events": 94,
+      "anomalies": 2
+    },
+    {
+      "label": "06",
+      "events": 126,
+      "anomalies": 4
+    },
+    {
+      "label": "09",
+      "events": 226,
+      "anomalies": 11
+    },
+    {
+      "label": "12",
+      "events": 284,
+      "anomalies": 9
+    },
+    {
+      "label": "15",
+      "events": 249,
+      "anomalies": 6
+    },
+    {
+      "label": "18",
+      "events": 314,
+      "anomalies": 13
+    },
+    {
+      "label": "21",
+      "events": 180,
+      "anomalies": 5
+    }
   ],
   "accessTrendPeakLabel": "18:00 UTC",
-
   "serviceRisk": [
-    { "name": "IAM", "risk": 88, "events": 410 },
-    { "name": "Secrets", "risk": 71, "events": 276 },
-    { "name": "Azure AD", "risk": 63, "events": 224 },
-    { "name": "GitHub", "risk": 44, "events": 186 },
-    { "name": "GCP", "risk": 29, "events": 101 }
+    {
+      "name": "IAM",
+      "risk": 88,
+      "events": 410
+    },
+    {
+      "name": "Secrets",
+      "risk": 71,
+      "events": 276
+    },
+    {
+      "name": "Azure AD",
+      "risk": 63,
+      "events": 224
+    },
+    {
+      "name": "GitHub",
+      "risk": 44,
+      "events": 186
+    },
+    {
+      "name": "GCP",
+      "risk": 29,
+      "events": 101
+    }
   ],
   "serviceRiskSummary": {
     "highestRiskService": "IAM",
     "sensitiveAssets": 31,
     "coverage": "8 / 8"
   },
-
   "activityLog": [
-    { "time": "08:42", "actor": "Aisha Rahman", "action": "Signed in and changed an admin permission", "source": "Frankfurt, DE", "system": "AWS IAM", "status": "Needs attention", "tone": "critical" },
-    { "time": "08:31", "actor": "build-runner-prod", "action": "Read 28 protected deployment secrets", "source": "us-east-1", "system": "Secrets Manager", "status": "Needs attention", "tone": "high" },
-    { "time": "08:04", "actor": "noah.williams", "action": "Opened dormant account and listed storage", "source": "Toronto, CA", "system": "Azure AD", "status": "Needs attention", "tone": "high" },
-    { "time": "07:46", "actor": "maya.chen", "action": "Updated a repository setting", "source": "Bucharest, RO", "system": "GitHub", "status": "Review later", "tone": "medium" },
-    { "time": "07:32", "actor": "data-pipeline", "action": "Completed its scheduled warehouse refresh", "source": "us-west-2", "system": "GCP", "status": "Normal", "tone": "normal" },
-    { "time": "07:15", "actor": "samir.patel", "action": "Updated a production storage policy", "source": "us-west-2", "system": "AWS IAM", "status": "Review later", "tone": "medium" }
+    {
+      "time": "08:42",
+      "actor": "Aisha Rahman",
+      "action": "Signed in and changed an admin permission",
+      "source": "Frankfurt, DE",
+      "system": "AWS IAM",
+      "status": "Needs attention",
+      "tone": "critical"
+    },
+    {
+      "time": "08:31",
+      "actor": "build-runner-prod",
+      "action": "Read 28 protected deployment secrets",
+      "source": "us-east-1",
+      "system": "Secrets Manager",
+      "status": "Needs attention",
+      "tone": "high"
+    },
+    {
+      "time": "08:04",
+      "actor": "noah.williams",
+      "action": "Opened dormant account and listed storage",
+      "source": "Toronto, CA",
+      "system": "Azure AD",
+      "status": "Needs attention",
+      "tone": "high"
+    },
+    {
+      "time": "07:46",
+      "actor": "maya.chen",
+      "action": "Updated a repository setting",
+      "source": "Bucharest, RO",
+      "system": "GitHub",
+      "status": "Review later",
+      "tone": "medium"
+    },
+    {
+      "time": "07:32",
+      "actor": "data-pipeline",
+      "action": "Completed its scheduled warehouse refresh",
+      "source": "us-west-2",
+      "system": "GCP",
+      "status": "Normal",
+      "tone": "normal"
+    },
+    {
+      "time": "07:15",
+      "actor": "samir.patel",
+      "action": "Updated a production storage policy",
+      "source": "us-west-2",
+      "system": "AWS IAM",
+      "status": "Review later",
+      "tone": "medium"
+    }
   ],
-
   "identities": [
     {
       "name": "Aisha Rahman",
@@ -193,59 +324,308 @@
       "description": "Usually works from London and Amsterdam using managed devices."
     }
   ],
-
   "cloudSources": [
-    { "name": "AWS IAM", "type": "Identity and permissions", "status": "Connected", "eventsToday": 410, "health": "Healthy", "icon": "KeyRound", "color": "#39e0c5", "dataFreshnessMin": 2 },
-    { "name": "AWS Secrets Manager", "type": "Sensitive credentials", "status": "Connected", "eventsToday": 276, "health": "Needs review", "icon": "LockKeyhole", "color": "#f5ae45", "dataFreshnessMin": 2 },
-    { "name": "Azure AD", "type": "Workforce identities", "status": "Connected", "eventsToday": 224, "health": "Healthy", "icon": "Users", "color": "#39e0c5", "dataFreshnessMin": 2 },
-    { "name": "GitHub Enterprise", "type": "Source-code access", "status": "Connected", "eventsToday": 186, "health": "Healthy", "icon": "PanelTop", "color": "#39e0c5", "dataFreshnessMin": 2 },
-    { "name": "GCP Audit Logs", "type": "Cloud activity", "status": "Connected", "eventsToday": 101, "health": "Limited history", "icon": "Cloud", "color": "#94a4b5", "dataFreshnessMin": 2 }
+    {
+      "name": "AWS IAM",
+      "type": "Identity and permissions",
+      "status": "Connected",
+      "eventsToday": 410,
+      "health": "Healthy",
+      "icon": "KeyRound",
+      "color": "#39e0c5",
+      "dataFreshnessMin": 2
+    },
+    {
+      "name": "AWS Secrets Manager",
+      "type": "Sensitive credentials",
+      "status": "Connected",
+      "eventsToday": 276,
+      "health": "Needs review",
+      "icon": "LockKeyhole",
+      "color": "#f5ae45",
+      "dataFreshnessMin": 2
+    },
+    {
+      "name": "Azure AD",
+      "type": "Workforce identities",
+      "status": "Connected",
+      "eventsToday": 224,
+      "health": "Healthy",
+      "icon": "Users",
+      "color": "#39e0c5",
+      "dataFreshnessMin": 2
+    },
+    {
+      "name": "GitHub Enterprise",
+      "type": "Source-code access",
+      "status": "Connected",
+      "eventsToday": 186,
+      "health": "Healthy",
+      "icon": "PanelTop",
+      "color": "#39e0c5",
+      "dataFreshnessMin": 2
+    },
+    {
+      "name": "GCP Audit Logs",
+      "type": "Cloud activity",
+      "status": "Connected",
+      "eventsToday": 101,
+      "health": "Limited history",
+      "icon": "Cloud",
+      "color": "#94a4b5",
+      "dataFreshnessMin": 2
+    }
   ],
   "cloudSourcesOnline": 5,
-
   "policies": [
-    { "title": "New country sign-in", "description": "Let us know when an account signs in from a country it has not used before.", "enabled": true, "category": "Location" },
-    { "title": "Sensitive permission changes", "description": "Raise an alert when someone creates or changes powerful account permissions.", "enabled": true, "category": "Permissions" },
-    { "title": "Dormant account activity", "description": "Raise an alert when an account returns after 30 days without activity.", "enabled": true, "category": "Account lifecycle" },
-    { "title": "Large secret retrieval", "description": "Raise an alert when a service reads far more protected secrets than usual.", "enabled": true, "category": "Sensitive data" },
-    { "title": "Out-of-hours activity", "description": "Review meaningful changes made outside the usual team work window.", "enabled": false, "category": "Timing" }
+    {
+      "ruleId": "POL-NEW-SOURCE",
+      "title": "New source or location",
+      "description": "Flag events from a source IP or location absent from the identity 30-day baseline.",
+      "enabled": true,
+      "category": "context",
+      "conditionKey": "new_source_or_location",
+      "points": 20,
+      "severityFloor": null,
+      "policyVersion": "policy-catalog-v1",
+      "updatedAt": "2026-08-18T00:00:00Z"
+    },
+    {
+      "ruleId": "POL-UNUSUAL-TIME",
+      "title": "Unusual activity time",
+      "description": "Flag events occurring outside the identity usual local activity hours.",
+      "enabled": true,
+      "category": "context",
+      "conditionKey": "unusual_time",
+      "points": 10,
+      "severityFloor": null,
+      "policyVersion": "policy-catalog-v1",
+      "updatedAt": "2026-08-18T00:00:00Z"
+    },
+    {
+      "ruleId": "POL-NEW-SERVICE-ACTION",
+      "title": "New service or action",
+      "description": "Flag a cloud service or action absent from the identity established baseline.",
+      "enabled": true,
+      "category": "context",
+      "conditionKey": "new_service_or_action",
+      "points": 15,
+      "severityFloor": null,
+      "policyVersion": "policy-catalog-v1",
+      "updatedAt": "2026-08-18T00:00:00Z"
+    },
+    {
+      "ruleId": "POL-HIGH-FREQUENCY",
+      "title": "High-frequency activity",
+      "description": "Flag a 15-minute identity/service event count above the historical p95.",
+      "enabled": true,
+      "category": "context",
+      "conditionKey": "high_frequency",
+      "points": 15,
+      "severityFloor": null,
+      "policyVersion": "policy-catalog-v1",
+      "updatedAt": "2026-08-18T00:00:00Z"
+    },
+    {
+      "ruleId": "POL-READ-ONLY",
+      "title": "Normal read-only action",
+      "description": "Baseline read-only actions such as get, list, describe, or view.",
+      "enabled": true,
+      "category": "action",
+      "conditionKey": "read_only",
+      "points": 0,
+      "severityFloor": null,
+      "policyVersion": "policy-catalog-v1",
+      "updatedAt": "2026-08-18T00:00:00Z"
+    },
+    {
+      "ruleId": "POL-LOGIN-KEY-CHANGE",
+      "title": "Login or access-key change",
+      "description": "Access-key lifecycle or login/security-setting change such as MFA or password reset.",
+      "enabled": true,
+      "category": "action",
+      "conditionKey": "login_or_key_change",
+      "points": 20,
+      "severityFloor": null,
+      "policyVersion": "policy-catalog-v1",
+      "updatedAt": "2026-08-18T00:00:00Z"
+    },
+    {
+      "ruleId": "POL-PERMISSION-CHANGE",
+      "title": "Permission or admin change",
+      "description": "Permission, role, privilege, or administrator-level change.",
+      "enabled": true,
+      "category": "action",
+      "conditionKey": "permission_or_admin_change",
+      "points": 35,
+      "severityFloor": null,
+      "policyVersion": "policy-catalog-v1",
+      "updatedAt": "2026-08-18T00:00:00Z"
+    },
+    {
+      "ruleId": "POL-SECRET-ACCESS",
+      "title": "Secret or credential access",
+      "description": "Access to or change of a secret, credential, or protected key.",
+      "enabled": true,
+      "category": "action",
+      "conditionKey": "secret_or_credential_access",
+      "points": 40,
+      "severityFloor": null,
+      "policyVersion": "policy-catalog-v1",
+      "updatedAt": "2026-08-18T00:00:00Z"
+    },
+    {
+      "ruleId": "POL-DISABLE-PROTECTION",
+      "title": "Disable security protection",
+      "description": "Disabling logging/auditing or removing a security protection or guardrail.",
+      "enabled": true,
+      "category": "action",
+      "conditionKey": "disable_or_remove_protection",
+      "points": 70,
+      "severityFloor": "High",
+      "policyVersion": "policy-catalog-v1",
+      "updatedAt": "2026-08-18T00:00:00Z"
+    },
+    {
+      "ruleId": "POL-NEW-LOCATION-ADMIN",
+      "title": "New location plus admin change",
+      "description": "A new source/location combined with an administrator-permission change.",
+      "enabled": true,
+      "category": "compound_sequence",
+      "conditionKey": "new_location_admin_change",
+      "points": 20,
+      "severityFloor": "High",
+      "policyVersion": "policy-catalog-v1",
+      "updatedAt": "2026-08-18T00:00:00Z"
+    },
+    {
+      "ruleId": "POL-UNUSUAL-TIME-SECRET",
+      "title": "Unusual time plus secret access",
+      "description": "An unusual-hours event combined with secret or credential access.",
+      "enabled": true,
+      "category": "compound_sequence",
+      "conditionKey": "unusual_time_secret_access",
+      "points": 15,
+      "severityFloor": null,
+      "policyVersion": "policy-catalog-v1",
+      "updatedAt": "2026-08-18T00:00:00Z"
+    },
+    {
+      "ruleId": "POL-NEW-SERVICE-BURST",
+      "title": "New service plus high frequency",
+      "description": "A new service/action combined with a high-frequency event burst.",
+      "enabled": true,
+      "category": "compound_sequence",
+      "conditionKey": "new_service_high_frequency",
+      "points": 10,
+      "severityFloor": null,
+      "policyVersion": "policy-catalog-v1",
+      "updatedAt": "2026-08-18T00:00:00Z"
+    },
+    {
+      "ruleId": "POL-PROTECTION-AFTER-PRIVILEGE",
+      "title": "Protection removed after privilege change",
+      "description": "A logging/protection removal following a privilege change in the correlated sequence.",
+      "enabled": true,
+      "category": "compound_sequence",
+      "conditionKey": "protection_after_privilege",
+      "points": 30,
+      "severityFloor": "Critical",
+      "policyVersion": "policy-catalog-v1",
+      "updatedAt": "2026-08-18T00:00:00Z"
+    }
   ],
-
   "reports": [
-    { "title": "Today's security summary", "detail": "17 items needing attention, grouped by urgency", "period": "Today", "type": "PDF-ready summary" },
-    { "title": "Access activity export", "detail": "All normalized activities and their plain-language explanations", "period": "Last 24 hours", "type": "CSV data" },
-    { "title": "Identity review pack", "detail": "Activity and risk context for the four most unusual accounts", "period": "This week", "type": "Shareable brief" }
+    {
+      "title": "Today's security summary",
+      "detail": "17 items needing attention, grouped by urgency",
+      "period": "Today",
+      "type": "PDF-ready summary"
+    },
+    {
+      "title": "Access activity export",
+      "detail": "All normalized activities and their plain-language explanations",
+      "period": "Last 24 hours",
+      "type": "CSV data"
+    },
+    {
+      "title": "Identity review pack",
+      "detail": "Activity and risk context for the four most unusual accounts",
+      "period": "This week",
+      "type": "Shareable brief"
+    }
   ],
-
   "severityTone": {
-    "Critical": { "label": "Critical", "colorDot": "#ff5962" },
-    "High": { "label": "High", "colorDot": "#f5ae45" },
-    "Medium": { "label": "Medium", "colorDot": "#94a4b5" },
-    "Low": { "label": "Low", "colorDot": "#39e0c5" }
+    "Critical": {
+      "label": "Critical",
+      "colorDot": "#ff5962"
+    },
+    "High": {
+      "label": "High",
+      "colorDot": "#f5ae45"
+    },
+    "Medium": {
+      "label": "Medium",
+      "colorDot": "#94a4b5"
+    },
+    "Low": {
+      "label": "Low",
+      "colorDot": "#39e0c5"
+    }
   },
-
-  "serviceOptions": ["All services", "AWS IAM", "AWS Secrets Manager", "Azure AD", "GitHub Enterprise"],
-
+  "serviceOptions": [
+    "All services",
+    "AWS IAM",
+    "AWS Secrets Manager",
+    "Azure AD",
+    "GitHub Enterprise"
+  ],
   "navigation": {
     "primary": [
-      { "label": "Command center", "key": "command" },
-      { "label": "Activity explorer", "key": "activity" },
-      { "label": "Identity profiles", "key": "identities" },
-      { "label": "Cloud estate", "key": "estate" },
-      { "label": "Policies", "key": "policies" }
+      {
+        "label": "Command center",
+        "key": "command"
+      },
+      {
+        "label": "Activity explorer",
+        "key": "activity"
+      },
+      {
+        "label": "Identity profiles",
+        "key": "identities"
+      },
+      {
+        "label": "Cloud estate",
+        "key": "estate"
+      },
+      {
+        "label": "Policies",
+        "key": "policies"
+      }
     ],
     "operations": [
-      { "label": "Reports", "key": "reports" },
-      { "label": "Configuration", "key": "settings" }
+      {
+        "label": "Reports",
+        "key": "reports"
+      },
+      {
+        "label": "Configuration",
+        "key": "settings"
+      }
     ]
   },
-
   "map": {
-    "defaultCenter": { "lat": 37.7749, "lng": -122.4194 },
+    "defaultCenter": {
+      "lat": 37.7749,
+      "lng": -122.4194
+    },
     "defaultZoom": 12,
-    "sampleMarker": { "lat": 37.7749, "lng": -122.4194, "title": "San Francisco" }
+    "sampleMarker": {
+      "lat": 37.7749,
+      "lng": -122.4194,
+      "title": "San Francisco"
+    }
   },
-
   "signedInDemoUser": {
     "name": "Aisha Rahman",
     "initials": "AR",

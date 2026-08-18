@@ -3,10 +3,9 @@
   "configurations": [
     {
       "name": "sentinel-frontend",
-      "runtimeExecutable": "C:\\Users\\GENAISINCBPUSR8\\AppData\\Local\\npm\\pnpm.cmd",
-      "runtimeArgs": ["dev"],
-      "port": 3000,
-      "cwd": "sentinel-access"
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "sentinel-access", "run", "dev"],
+      "port": 3000
     }
   ]
 }

@@ -1,12 +1,17 @@
 <!--
 Sync Impact Report
-- Version change: [TEMPLATE] → 1.0.0 (initial ratification)
-- Modified principles: n/a (first adoption)
-- Added sections: Core Principles (5), Technology & Architecture Constraints,
-  Development Workflow, Governance
+- Version change: 1.0.0 → 2.0.0
+- Modified principle: III. Simplicity and YAGNI → III. Scoped Demo
+  Infrastructure and YAGNI
+- Modified sections: Technology & Architecture Constraints, Development
+  Workflow
+- Added sections: none
 - Removed sections: none
-- Follow-up TODOs: RATIFICATION_DATE set to today (2026-08-18) as this is the
-  initial adoption date; adjust if an earlier date should be recorded.
+- Rationale for MAJOR change: the prior NON-NEGOTIABLE prohibition on any
+  database or external service is replaced with explicit approval for the
+  process-local SQLite store and bounded liteLLM proxy already adopted by
+  approved features. Durable infrastructure remains gated by a feature spec.
+- Follow-up TODOs: none
 -->
 
 # Sentinel Access Constitution
@@ -32,14 +37,20 @@ existing component props, unless a change is explicitly requested.
 Rationale: this is a backend-swap, not a redesign; unrelated UI churn adds
 risk and review burden without serving the stated goal.
 
-### III. Simplicity and YAGNI (NON-NEGOTIABLE)
-The backend MUST NOT introduce a database, authentication/authorization,
-external services, migrations, or other infrastructure not required by the
-current demo scope. Persistence MUST use in-memory state seeded at startup
-from `server/data/synthetic-data.json` (or an equivalent bundled JSON
-fixture), with no external DB engine. Rationale: this is a hackathon/demo
-project; added infrastructure increases setup cost and failure surface
-without a corresponding requirement.
+### III. Scoped Demo Infrastructure and YAGNI (NON-NEGOTIABLE)
+The project MUST use the simplest infrastructure that satisfies an approved
+feature specification. Process-local SQLite using Python's standard library
+is approved for relational demo state and MUST remain seeded from bundled
+synthetic fixtures. A separately operated liteLLM-compatible proxy is
+approved only for explicitly specified AI features; every such dependency
+MUST have bounded calls, validated outputs, and a usable non-AI fallback.
+The project MUST NOT introduce a durable database server, ORM, migration
+framework, authentication/authorization system, message broker, or other
+managed infrastructure without a new specification that demonstrates why
+the existing process-local approach is insufficient. Rationale: SQLite and
+the bounded AI proxy now serve demonstrated product needs, while the gate on
+additional infrastructure preserves the hackathon project's low setup cost
+and small failure surface.
 
 ### IV. Contract Clarity Before Implementation
 Every new endpoint MUST have its request/response shape (path, method,
@@ -63,16 +74,23 @@ existing demo-safety guarantee described in `CONTEXT.md`.
 - Backend: Python + FastAPI, run as a standalone service separate from the
   existing Express static-file server (or replacing it — decided at plan
   time), serving JSON over REST.
-- Persistence: in-memory Python data structures / JSON file store only.
-  No SQL or NoSQL database engine, no ORM, no migrations.
+- Persistence: one process-local in-memory SQLite database accessed through
+  the existing `app/db.py` serialization helpers and seeded from bundled
+  synthetic fixtures. No durable database server, ORM, or migration
+  framework without a separately approved feature specification.
+- AI integration: the existing liteLLM-compatible proxy MAY be used by
+  explicitly specified AI capabilities. Prompts MUST contain demo-safe data,
+  outputs MUST be schema-validated before affecting application state, and a
+  timeout/fallback path MUST keep core non-AI workflows usable.
 - Auth: none. Endpoints are open, matching the current no-auth demo
   posture. Do not add API keys, sessions, or login flows unless a future
   amendment changes this principle.
 - Frontend integration: React frontend calls the FastAPI backend via
   `axios` (already a dependency) or `fetch`; routing may use `wouter`
   (already a dependency) if navigation changes are needed.
-- Seed data: `server/data/synthetic-data.json` is the source of truth for
-  initial in-memory state shape and demo values.
+- Seed data: `server/data/synthetic-data.json` and feature-specific files
+  under `datasets/` are the sources of truth for initial/demo data. Expected
+  test labels MUST be kept separate from runtime model inputs.
 
 ## Development Workflow
 
@@ -83,6 +101,9 @@ existing demo-safety guarantee described in `CONTEXT.md`.
 - Each view's backend migration (Command Center, Activity Explorer,
   Identity Profiles, Cloud Estate, Policies, Reports/Configuration, dataset
   import) MUST be traceable to explicit tasks before implementation.
+- Features that add or change stored relationships, scoring rules, or AI
+  authority boundaries MUST define their data model, calculation semantics,
+  failure behavior, and REST contracts before task generation.
 - Changes MUST be verified by running both the FastAPI backend and the
   Vite frontend together and confirming the affected view renders
   real API data with the same behavior as before the migration.
@@ -99,4 +120,4 @@ plans, and task lists produced via Spec Kit commands MUST comply with
 these principles; any deviation must be explicitly justified in the
 relevant plan's Complexity Tracking section.
 
-**Version**: 1.0.0 | **Ratified**: 2026-08-18 | **Last Amended**: 2026-08-18
+**Version**: 2.0.0 | **Ratified**: 2026-08-18 | **Last Amended**: 2026-08-18

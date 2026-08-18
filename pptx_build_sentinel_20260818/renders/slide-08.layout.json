@@ -1,0 +1,805 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/uz95j3",
+    "id": "uz95j3",
+    "slide": 8,
+    "layoutId": "feffe2db-a0a8-4ed3-a35e-01e01dec0bea",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "a279a335-f365-4583-91de-0b414e51edf2",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#FFFFFF",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "Arial"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "feffe2db-a0a8-4ed3-a35e-01e01dec0bea",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "a279a335-f365-4583-91de-0b414e51edf2",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "a279a335-f365-4583-91de-0b414e51edf2",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/sbalw3mp",
+      "id": "1",
+      "name": "close-eyebrow",
+      "bbox": [
+        56,
+        42,
+        420,
+        28
+      ],
+      "geometry": "rect",
+      "text": "WHY SENTINEL ACCESS",
+      "textPreview": "WHY SENTINEL ACCESS",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 16,
+        "typeface": "Arial",
+        "color": "#0B7D70",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "none",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "WHY SENTINEL ACCESS"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "WHY SENTINEL ACCESS",
+          "resolvedTextStyle": {
+            "fontSize": 16,
+            "typeface": "Arial",
+            "color": "#0B7D70",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "WHY SENTINEL ACCESS",
+              "fontSize": 16,
+              "typeface": "Arial",
+              "color": "#0B7D70",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7a143y54",
+      "id": "2",
+      "name": "close-title",
+      "bbox": [
+        56,
+        126,
+        800,
+        202
+      ],
+      "geometry": "rect",
+      "text": "From noisy access logs\nto explainable action.",
+      "textPreview": "From noisy access logs | to explainable action.",
+      "resolvedFontSize": 67,
+      "resolvedTextStyle": {
+        "anchor": 3,
+        "fontSize": 67,
+        "typeface": "Arial",
+        "color": "#0B1220",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "bottom",
+        "autoFit": "none",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "From noisy access logs"
+          },
+          {
+            "index": 2,
+            "text": "to explainable action."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "From noisy access logs",
+          "resolvedTextStyle": {
+            "fontSize": 67,
+            "typeface": "Arial",
+            "color": "#0B1220",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "From noisy access logs",
+              "fontSize": 67,
+              "typeface": "Arial",
+              "color": "#0B1220",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "to explainable action.",
+          "resolvedTextStyle": {
+            "fontSize": 67,
+            "typeface": "Arial",
+            "color": "#0B1220",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "to explainable action.",
+              "fontSize": 67,
+              "typeface": "Arial",
+              "color": "#0B1220",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/69s3ut4j",
+      "id": "3",
+      "name": "close-main-rule",
+      "bbox": [
+        56,
+        368,
+        1168,
+        0
+      ],
+      "geometry": "straightConnector1",
+      "lineColor": "#0B1220",
+      "lineWidth": 1
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/58jm1ony",
+      "id": "4",
+      "name": "close-tag-0",
+      "bbox": [
+        56,
+        410,
+        170,
+        30
+      ],
+      "geometry": "rect",
+      "text": "BUILT",
+      "textPreview": "BUILT",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 16,
+        "typeface": "Arial",
+        "color": "#0B7D70",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "none",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "BUILT"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "BUILT",
+          "resolvedTextStyle": {
+            "fontSize": 16,
+            "typeface": "Arial",
+            "color": "#0B7D70",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "BUILT",
+              "fontSize": 16,
+              "typeface": "Arial",
+              "color": "#0B7D70",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/k7alsjmd",
+      "id": "5",
+      "name": "close-copy-0",
+      "bbox": [
+        242,
+        408,
+        930,
+        54
+      ],
+      "geometry": "rect",
+      "text": "A working analyst experience with FastAPI, SQLite, AI explanations, copilot search, and narrative reports.",
+      "textPreview": "A working analyst experience with FastAPI, SQLite, AI explanations, copilot search, and narrative reports.",
+      "resolvedFontSize": 22.51,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 22.51,
+        "typeface": "Arial",
+        "color": "#596574",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "none",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "A working analyst experience with FastAPI, SQLite, AI explanations, copilot search, and"
+          },
+          {
+            "index": 2,
+            "text": "narrative reports."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "A working analyst experience with FastAPI, SQLite, AI explanations, copilot search, and narrative reports.",
+          "resolvedTextStyle": {
+            "fontSize": 22.51,
+            "typeface": "Arial",
+            "color": "#596574",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "A working analyst experience with FastAPI, SQLite, AI explanations, copilot search, and narrative reports.",
+              "fontSize": 22.51,
+              "typeface": "Arial",
+              "color": "#596574",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/j6h4ze58",
+      "id": "6",
+      "name": "close-tag-1",
+      "bbox": [
+        56,
+        492,
+        170,
+        30
+      ],
+      "geometry": "rect",
+      "text": "TRUSTED",
+      "textPreview": "TRUSTED",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 16,
+        "typeface": "Arial",
+        "color": "#0B7D70",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "none",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "TRUSTED"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "TRUSTED",
+          "resolvedTextStyle": {
+            "fontSize": 16,
+            "typeface": "Arial",
+            "color": "#0B7D70",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "TRUSTED",
+              "fontSize": 16,
+              "typeface": "Arial",
+              "color": "#0B7D70",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/il83q94n",
+      "id": "7",
+      "name": "close-copy-1",
+      "bbox": [
+        242,
+        490,
+        930,
+        54
+      ],
+      "geometry": "rect",
+      "text": "A policy-first risk design that keeps AI bounded, validated, evidence-grounded, and fail-safe.",
+      "textPreview": "A policy-first risk design that keeps AI bounded, validated, evidence-grounded, and fail-safe.",
+      "resolvedFontSize": 22.51,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 22.51,
+        "typeface": "Arial",
+        "color": "#596574",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "none",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "A policy-first risk design that keeps AI bounded, validated, evidence-grounded, and"
+          },
+          {
+            "index": 2,
+            "text": "fail-safe."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "A policy-first risk design that keeps AI bounded, validated, evidence-grounded, and fail-safe.",
+          "resolvedTextStyle": {
+            "fontSize": 22.51,
+            "typeface": "Arial",
+            "color": "#596574",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "A policy-first risk design that keeps AI bounded, validated, evidence-grounded, and fail-safe.",
+              "fontSize": 22.51,
+              "typeface": "Arial",
+              "color": "#596574",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/p43mxsni",
+      "id": "8",
+      "name": "close-tag-2",
+      "bbox": [
+        56,
+        574,
+        170,
+        30
+      ],
+      "geometry": "rect",
+      "text": "EXTENSIBLE",
+      "textPreview": "EXTENSIBLE",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 16,
+        "typeface": "Arial",
+        "color": "#0B7D70",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "none",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "EXTENSIBLE"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "EXTENSIBLE",
+          "resolvedTextStyle": {
+            "fontSize": 16,
+            "typeface": "Arial",
+            "color": "#0B7D70",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "EXTENSIBLE",
+              "fontSize": 16,
+              "typeface": "Arial",
+              "color": "#0B7D70",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/o3u54nmx",
+      "id": "9",
+      "name": "close-copy-2",
+      "bbox": [
+        242,
+        572,
+        930,
+        54
+      ],
+      "geometry": "rect",
+      "text": "A raw-first three-cloud ingestion path that can grow behind stable contracts and adapter boundaries.",
+      "textPreview": "A raw-first three-cloud ingestion path that can grow behind stable contracts and adapter boundaries.",
+      "resolvedFontSize": 22.51,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 22.51,
+        "typeface": "Arial",
+        "color": "#596574",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "none",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "A raw-first three-cloud ingestion path that can grow behind stable contracts and adapter"
+          },
+          {
+            "index": 2,
+            "text": "boundaries."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "A raw-first three-cloud ingestion path that can grow behind stable contracts and adapter boundaries.",
+          "resolvedTextStyle": {
+            "fontSize": 22.51,
+            "typeface": "Arial",
+            "color": "#596574",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "A raw-first three-cloud ingestion path that can grow behind stable contracts and adapter boundaries.",
+              "fontSize": 22.51,
+              "typeface": "Arial",
+              "color": "#596574",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ap4fy1kr",
+      "id": "10",
+      "name": "close-accent",
+      "bbox": [
+        1058,
+        88,
+        166,
+        166
+      ],
+      "geometry": "rect",
+      "fillColor": "#39E0C5",
+      "lineColor": "#39E0C5",
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/bqdg76lc",
+      "id": "11",
+      "name": "close-accent-text",
+      "bbox": [
+        1078,
+        112,
+        126,
+        122
+      ],
+      "geometry": "rect",
+      "text": "SIGNAL\n→\nDECISION",
+      "textPreview": "SIGNAL | → | DECISION",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 22,
+        "typeface": "Arial",
+        "color": "#0B1220",
+        "bold": true,
+        "alignment": "center",
+        "verticalAlignment": "middle",
+        "autoFit": "none",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "SIGNAL"
+          },
+          {
+            "index": 2,
+            "text": "→"
+          },
+          {
+            "index": 3,
+            "text": "DECISION"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "SIGNAL",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "typeface": "Arial",
+            "color": "#0B1220",
+            "bold": true,
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "SIGNAL",
+              "fontSize": 22,
+              "typeface": "Arial",
+              "color": "#0B1220",
+              "bold": true,
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "→",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "typeface": "Arial",
+            "color": "#0B1220",
+            "bold": true,
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "→",
+              "fontSize": 22,
+              "typeface": "Arial",
+              "color": "#0B1220",
+              "bold": true,
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "DECISION",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "typeface": "Arial",
+            "color": "#0B1220",
+            "bold": true,
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "DECISION",
+              "fontSize": 22,
+              "typeface": "Arial",
+              "color": "#0B1220",
+              "bold": true,
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

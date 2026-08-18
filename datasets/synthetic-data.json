@@ -1,0 +1,67 @@
+[
+  {
+    "timestamp": "2026-08-18T08:12:03Z",
+    "user": "jordan.rivera@acme.com",
+    "action": "s3_list",
+    "sourceIp": "203.0.113.14",
+    "service": "S3",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-08-18T08:14:41Z",
+    "user": "priya.natarajan@acme.com",
+    "action": "iam_policy_update",
+    "sourceIp": "203.0.113.55",
+    "service": "IAM",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-08-18T08:20:09Z",
+    "user": "contractor-t.wong@acme.com",
+    "action": "secret_read",
+    "sourceIp": "198.51.100.201",
+    "service": "SecretsManager",
+    "status": "denied"
+  },
+  {
+    "timestamp": "2026-08-18T09:02:55Z",
+    "user": "marcus.lee@acme.com",
+    "action": "ec2_describe_instances",
+    "sourceIp": "203.0.113.14",
+    "service": "EC2",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-08-18T09:11:37Z",
+    "user": "unknown-svc-account",
+    "action": "admin_role_assumed",
+    "sourceIp": "198.51.100.7",
+    "service": "IAM",
+    "status": "critical"
+  },
+  {
+    "timestamp": "2026-08-18T09:45:12Z",
+    "user": "priya.natarajan@acme.com",
+    "action": "cloudwatch_view",
+    "sourceIp": "203.0.113.55",
+    "service": "CloudWatch",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-08-18T10:03:28Z",
+    "user": "jordan.rivera@acme.com",
+    "action": "delete_bucket_policy",
+    "sourceIp": "203.0.113.14",
+    "service": "S3",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-08-18T10:22:04Z",
+    "user": "contractor-t.wong@acme.com",
+    "action": "rds_snapshot_export",
+    "sourceIp": "198.51.100.201",
+    "service": "RDS",
+    "status": "anomalous"
+  },
+  {}
+]

@@ -124,7 +124,7 @@ An analyst uploads a CSV/JSON dataset of access activity, and the backend valida
 - **SC-002**: A status change made to a finding (start investigation / escalate) survives a full page reload, proving the change was persisted server-side rather than only in local UI state.
 - **SC-003**: An analyst can upload a dataset and see Activity Explorer reflect the imported records within the same interaction flow that exists today, with validation feedback shown for invalid files.
 - **SC-004**: When the backend is stopped or unreachable, every view shows a clear loading/error indication instead of blank content or stale hardcoded data.
-- **SC-005**: A fresh backend start (no imports, no changes) reproduces the same Command Center KPI figures and queue composition as today's hardcoded demo, so the migration is visibly a like-for-like swap rather than a data/content change.
+- **SC-005**: The `needsAttention` count and `mostUrgentCase` KPI are always internally consistent with the visible investigation queue — `needsAttention` equals the number of findings not yet escalated, and `mostUrgentCase` names the highest-scoring finding among them. This may differ from the original static demo's hardcoded figures (which were not derived from the queue); consistency with the live queue takes priority over matching the old demo's numbers.
 
 ## Assumptions
 

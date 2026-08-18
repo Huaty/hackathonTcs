@@ -1,7 +1,7 @@
 /** Signal Room reminder: this analyst workbench uses asymmetric evidence layers, not a generic centered card grid. */
-import { useEffect, useMemo, useState, type CSSProperties } from "react";
+import { useCallback, useEffect, useMemo, useState, type CSSProperties } from "react";
 import { toast } from "sonner";
-import { api } from "@/lib/api";
+import { api, getFindingExplanation } from "@/lib/api";
 import {
   Activity,
   ArrowDownToLine,
@@ -44,6 +44,7 @@ import {
 } from "recharts";
 import WorkspaceViews, { type WorkspaceKey } from "@/components/WorkspaceViews";
 import DatasetImporter, { type ImportedDataset } from "@/components/DatasetImporter";
+import CopilotPanel from "@/components/CopilotPanel";
 
 type Severity = "Critical" | "High" | "Medium" | "Low";
 type FindingStatus = "open" | "in_progress" | "escalated" | null;
@@ -161,6 +162,8 @@ export default function Home() {
   const [commandCenterError, setCommandCenterError] = useState(false);
   const alerts = commandCenter?.findings ?? [];
   const [selected, setSelected] = useState<AlertRecord | null>(null);
+  const [aiExplanation, setAiExplanation] = useState<string | null>(null);
+  const [aiExplanationLoading, setAiExplanationLoading] = useState(false);
   const [severityFilter, setSeverityFilter] = useState<"All" | Severity>("All");
   const [serviceFilter, setServiceFilter] = useState("All services");
   const [searchQuery, setSearchQuery] = useState("");
@@ -171,8 +174,9 @@ export default function Home() {
   });
   const [importedDataset, setImportedDataset] = useState<ImportedDataset | null>(null);
   const [notificationUnread, setNotificationUnread] = useState(true);
+  const [copilotOpen, setCopilotOpen] = useState(false);
 
-  const loadCommandCenter = () => {
+  const loadCommandCenter = useCallback(() => {
     api
       .get<CommandCenterData>("/command-center")
       .then((response) => {
@@ -180,11 +184,11 @@ export default function Home() {
         setCommandCenterError(false);
       })
       .catch(() => setCommandCenterError(true));
-  };
+  }, []);
 
   useEffect(() => {
-    loadCommandCenter();
-  }, []);
+    if (workspaceView === "command") loadCommandCenter();
+  }, [workspaceView, importedDataset, loadCommandCenter]);
 
   const filteredAlerts = useMemo(() => alerts.filter((alert) => {
     const bySeverity = severityFilter === "All" || alert.severity === severityFilter;
@@ -204,10 +208,16 @@ export default function Home() {
 
   const openFinding = (alert: AlertRecord) => {
     setSelected(alert);
+    setAiExplanation(null);
+    setAiExplanationLoading(true);
     api
       .get<AlertRecord>(`/findings/${alert.id}`)
       .then((response) => setSelected(response.data))
       .catch(() => toast.error("Could not load evidence", { description: "The backend is unreachable. Try again shortly." }));
+    getFindingExplanation(alert.id)
+      .then((response) => setAiExplanation(response.data.explanation))
+      .catch(() => setAiExplanation(null))
+      .finally(() => setAiExplanationLoading(false));
   };
 
   const setFindingStatus = (id: string, status: "in_progress" | "escalated") => {
@@ -277,24 +287,26 @@ export default function Home() {
     <div className="app-shell relative overflow-hidden">
       <div className="signal-grid pointer-events-none absolute inset-0 opacity-50" />
       <div className="relative z-10 flex min-h-screen">
-      <aside className="desktop-rail sticky top-0 z-30 h-screen w-[238px] shrink-0 border-r border-white/10 bg-[#0b121b]/95 px-4 py-5 backdrop-blur-xl">
+      <aside className="desktop-rail sticky top-0 z-30 flex h-screen w-[238px] shrink-0 flex-col border-r border-white/10 bg-[#0b121b]/95 px-4 py-5 backdrop-blur-xl">
         <div className="pointer-events-none absolute right-0 top-[74px] bottom-[82px] w-px bg-gradient-to-b from-transparent via-[#39e0c5]/45 to-transparent"><span className="status-pulse absolute -left-[3px] top-[14%] size-[7px] rounded-full bg-[#39e0c5]" /></div>
         <BrandBlock />
-        <div className="mt-10 px-2"><p className="mono text-[10px] uppercase tracking-[0.16em] text-slate-600">Workspace</p></div>
-        <nav className="mt-3 space-y-1" aria-label="Primary navigation">
-          {navItems.map((item) => {
-            const Icon = item.icon;
-            return <button key={item.label} onClick={() => navigateToView(item.key)} className={`group flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition-colors ${workspaceView === item.key ? "bg-[#173039] text-[#b7fff2]" : "text-slate-500 hover:bg-white/[0.045] hover:text-slate-200"}`}><Icon className="size-[17px]" />{item.label}{workspaceView === item.key && <span className="ml-auto size-1.5 rounded-full bg-[#39e0c5] shadow-[0_0_13px_#39e0c5]" />}</button>;
-          })}
-        </nav>
-        <div className="mt-7 border-t border-white/10 pt-6">
-          <p className="mono px-2 text-[10px] uppercase tracking-[0.16em] text-slate-600">Operations</p>
-          <div className="mt-3 space-y-1">
-            <button onClick={() => navigateToView("reports")} className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition-colors ${workspaceView === "reports" ? "bg-[#173039] text-[#b7fff2]" : "text-slate-500 hover:bg-white/[0.045] hover:text-slate-200"}`}><ArrowDownToLine className="size-[17px]" />Reports</button>
-            <button onClick={() => navigateToView("settings")} className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition-colors ${workspaceView === "settings" ? "bg-[#173039] text-[#b7fff2]" : "text-slate-500 hover:bg-white/[0.045] hover:text-slate-200"}`}><Settings className="size-[17px]" />Configuration</button>
+        <div className="no-scrollbar min-h-0 flex-1 overflow-y-auto">
+          <div className="mt-10 px-2"><p className="mono text-[10px] uppercase tracking-[0.16em] text-slate-600">Workspace</p></div>
+          <nav className="mt-3 space-y-1" aria-label="Primary navigation">
+            {navItems.map((item) => {
+              const Icon = item.icon;
+              return <button key={item.label} onClick={() => navigateToView(item.key)} className={`group flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition-colors ${workspaceView === item.key ? "bg-[#173039] text-[#b7fff2]" : "text-slate-500 hover:bg-white/[0.045] hover:text-slate-200"}`}><Icon className="size-[17px]" />{item.label}{workspaceView === item.key && <span className="ml-auto size-1.5 rounded-full bg-[#39e0c5] shadow-[0_0_13px_#39e0c5]" />}</button>;
+            })}
+          </nav>
+          <div className="mt-7 border-t border-white/10 pt-6">
+            <p className="mono px-2 text-[10px] uppercase tracking-[0.16em] text-slate-600">Operations</p>
+            <div className="mt-3 space-y-1">
+              <button onClick={() => navigateToView("reports")} className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition-colors ${workspaceView === "reports" ? "bg-[#173039] text-[#b7fff2]" : "text-slate-500 hover:bg-white/[0.045] hover:text-slate-200"}`}><ArrowDownToLine className="size-[17px]" />Reports</button>
+              <button onClick={() => navigateToView("settings")} className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition-colors ${workspaceView === "settings" ? "bg-[#173039] text-[#b7fff2]" : "text-slate-500 hover:bg-white/[0.045] hover:text-slate-200"}`}><Settings className="size-[17px]" />Configuration</button>
+            </div>
           </div>
         </div>
-        <div className="absolute inset-x-4 bottom-5 rounded-2xl border border-[#39e0c5]/15 bg-[#10252a]/60 p-3.5">
+        <div className="mt-4 shrink-0 rounded-2xl border border-[#39e0c5]/15 bg-[#10252a]/60 p-3.5">
           <div className="flex items-center gap-2"><span className="status-pulse size-2 rounded-full bg-[#39e0c5]" /><span className="mono text-[10px] uppercase tracking-[0.12em] text-[#75f5e0]">Detection live</span></div>
           <p className="mt-2 text-xs leading-5 text-slate-400">8 cloud sources normalized · demo telemetry</p>
         </div>
@@ -308,6 +320,7 @@ export default function Home() {
           </div>
           <div className="flex items-center gap-2 sm:gap-3">
             <div className="hidden items-center gap-2 rounded-xl border border-white/10 bg-white/[0.025] px-3 py-2 text-xs text-slate-500 lg:flex"><Radio className="size-3.5 text-[#39e0c5]" />Last 24 hours <ChevronDown className="size-3.5" /></div>
+            <button onClick={() => setCopilotOpen(true)} className="inline-flex items-center gap-2 rounded-xl border border-[#39e0c5]/25 bg-[#39e0c5]/10 px-3 py-2 text-xs font-semibold text-[#8df6e7] transition-transform active:scale-[0.97] hover:bg-[#39e0c5]/15 sm:px-4"><Sparkles className="size-3.5" /><span className="hidden sm:inline">Ask Sentinel</span><span className="sm:hidden">Ask</span></button>
             <button onClick={simulateAnomaly} className="inline-flex items-center gap-2 rounded-xl bg-[#39e0c5] px-3 py-2 text-xs font-semibold text-[#071312] shadow-[0_0_26px_rgba(57,224,197,0.13)] transition-transform active:scale-[0.97] sm:px-4"><Sparkles className="size-3.5" /><span className="hidden sm:inline">Simulate anomaly</span><span className="sm:hidden">Simulate</span></button>
             <button onClick={() => { setNotificationUnread(false); toast.success("Notifications cleared", { description: "You have read the current demo alert summary." }); }} className="relative rounded-xl border border-white/10 bg-white/[0.025] p-2 text-slate-400 transition-colors hover:text-white"><Bell className="size-4" />{notificationUnread && <span className="absolute right-1.5 top-1.5 size-1.5 rounded-full bg-[#f5ae45]" />}</button>
             <button onClick={() => toast.info("Signed-in demo analyst", { description: "Aisha Rahman · Cloud Security Analyst · Connect this menu to your identity provider in production." })} className="flex size-8 items-center justify-center rounded-full bg-gradient-to-br from-[#2f6471] to-[#1d3049] text-xs font-semibold text-[#b9fff4]">AR</button>
@@ -365,11 +378,13 @@ export default function Home() {
       </main>
       </div>
 
-      {selected && <div className="fixed inset-0 z-50 flex justify-end bg-[#02070b]/55 backdrop-blur-[2px]" role="dialog" aria-modal="true" aria-label="Finding evidence"><aside className="h-full w-full max-w-[560px] overflow-y-auto border-l border-white/10 bg-[#0d1620] shadow-[-24px_0_70px_rgba(0,0,0,0.35)]"><div className="sticky top-0 z-10 flex items-center justify-between border-b border-white/10 bg-[#0d1620]/95 px-5 py-4 backdrop-blur"><div className="flex items-center gap-3"><div className={`flex size-9 items-center justify-center rounded-xl ${severityTone[selected.severity].pill}`}><ShieldAlert className="size-4" /></div><div><p className="mono text-[10px] uppercase tracking-[0.13em] text-slate-500">Evidence dossier</p><p className="text-sm font-medium text-slate-100">{selected.id}</p></div></div><button onClick={() => setSelected(null)} className="rounded-lg p-2 text-slate-400 hover:bg-white/5 hover:text-white" aria-label="Close evidence dossier"><X className="size-5" /></button></div><div className="p-5 sm:p-7"><div className="flex flex-wrap items-center gap-3"><SeverityPill severity={selected.severity} /><span className="mono text-[10px] text-slate-500">OBSERVED {selected.time}</span></div><h2 className="mt-4 text-2xl font-semibold tracking-[-0.04em] text-white">{selected.title}</h2><p className="mt-3 text-sm leading-6 text-slate-400">{selected.description}</p><div className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-white/10 bg-white/10"><div className="bg-[#101a25] p-4"><p className="mono text-[9px] uppercase tracking-[0.12em] text-slate-600">Identity</p><p className="mt-2 text-sm font-medium text-slate-200">{selected.entity}</p><p className="mt-1 text-xs text-slate-500">{selected.role}</p></div><div className="bg-[#101a25] p-4"><p className="mono text-[9px] uppercase tracking-[0.12em] text-slate-600">Risk score</p><p className="mt-1 text-2xl font-semibold text-[#ffbe62]">{selected.score}<span className="text-xs text-slate-500"> / 100</span></p><p className="text-xs text-slate-500">high-confidence deviation</p></div><div className="bg-[#101a25] p-4"><p className="mono text-[9px] uppercase tracking-[0.12em] text-slate-600">Source</p><p className="mono mt-2 text-xs text-slate-300">{selected.source}</p><p className="mt-1 text-xs text-slate-500">{selected.region}</p></div><div className="bg-[#101a25] p-4"><p className="mono text-[9px] uppercase tracking-[0.12em] text-slate-600">Service</p><p className="mt-2 text-sm font-medium text-slate-200">{selected.service}</p><p className="mt-1 text-xs text-slate-500">normalized audit signal</p></div></div><section className="mt-7"><p className="mono text-[10px] uppercase tracking-[0.14em] text-[#76eddb]">AI explanation</p><div className="mt-3 rounded-xl border border-[#39e0c5]/15 bg-[#10242a]/35 p-4"><p className="text-sm leading-6 text-slate-300">{selected.baseline}</p></div></section><section className="mt-7"><p className="mono text-[10px] uppercase tracking-[0.14em] text-[#76eddb]">Evidence signals</p><div className="mt-3 space-y-2">{selected.signals.map((signal, index) => <div key={signal} className="flex items-center justify-between rounded-xl border border-white/[0.08] bg-white/[0.025] px-3.5 py-3"><div className="flex items-center gap-3"><span className="mono flex size-5 items-center justify-center rounded bg-white/[0.05] text-[9px] text-slate-500">0{index + 1}</span><span className="text-xs text-slate-300">{signal}</span></div><Check className="size-3.5 text-[#39e0c5]" /></div>)}</div></section><section className="mt-7 overflow-hidden rounded-xl border border-[#f5ae45]/20 bg-[#251c10]/45"><div className="flex gap-3 p-4"><CircleAlert className="mt-0.5 size-4 shrink-0 text-[#f5ae45]" /><div><p className="text-sm font-medium text-[#ffcf89]">Recommended response</p><p className="mt-1 text-xs leading-5 text-slate-400">{selected.recommended}</p></div></div></section><div className="mt-7 flex gap-3"><button onClick={() => { if (selected.status === "in_progress") { setSelected(null); return; } setFindingStatus(selected.id, "in_progress"); }} className="flex-1 rounded-xl bg-[#39e0c5] px-4 py-3 text-xs font-semibold text-[#071312] transition-transform active:scale-[0.97]">{selected.status === "in_progress" ? "Back to queue" : "Start investigation"}</button><button onClick={() => setFindingStatus(selected.id, "escalated")} className="rounded-xl border border-white/10 px-4 py-3 text-xs font-semibold text-slate-300 hover:bg-white/5">Escalate</button></div></div></aside></div>}
+      <CopilotPanel open={copilotOpen} onClose={() => setCopilotOpen(false)} />
+
+      {selected && <div className="fixed inset-0 z-50 flex justify-end bg-[#02070b]/55 backdrop-blur-[2px]" role="dialog" aria-modal="true" aria-label="Finding evidence"><aside className="h-full w-full max-w-[560px] overflow-y-auto border-l border-white/10 bg-[#0d1620] shadow-[-24px_0_70px_rgba(0,0,0,0.35)]"><div className="sticky top-0 z-10 flex items-center justify-between border-b border-white/10 bg-[#0d1620]/95 px-5 py-4 backdrop-blur"><div className="flex items-center gap-3"><div className={`flex size-9 items-center justify-center rounded-xl ${severityTone[selected.severity].pill}`}><ShieldAlert className="size-4" /></div><div><p className="mono text-[10px] uppercase tracking-[0.13em] text-slate-500">Evidence dossier</p><p className="text-sm font-medium text-slate-100">{selected.id}</p></div></div><button onClick={() => { setSelected(null); setAiExplanation(null); }} className="rounded-lg p-2 text-slate-400 hover:bg-white/5 hover:text-white" aria-label="Close evidence dossier"><X className="size-5" /></button></div><div className="p-5 sm:p-7"><div className="flex flex-wrap items-center gap-3"><SeverityPill severity={selected.severity} /><span className="mono text-[10px] text-slate-500">OBSERVED {selected.time}</span></div><h2 className="mt-4 text-2xl font-semibold tracking-[-0.04em] text-white">{selected.title}</h2><p className="mt-3 text-sm leading-6 text-slate-400">{selected.description}</p><div className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-white/10 bg-white/10"><div className="bg-[#101a25] p-4"><p className="mono text-[9px] uppercase tracking-[0.12em] text-slate-600">Identity</p><p className="mt-2 text-sm font-medium text-slate-200">{selected.entity}</p><p className="mt-1 text-xs text-slate-500">{selected.role}</p></div><div className="bg-[#101a25] p-4"><p className="mono text-[9px] uppercase tracking-[0.12em] text-slate-600">Risk score</p><p className="mt-1 text-2xl font-semibold text-[#ffbe62]">{selected.score}<span className="text-xs text-slate-500"> / 100</span></p><p className="text-xs text-slate-500">high-confidence deviation</p></div><div className="bg-[#101a25] p-4"><p className="mono text-[9px] uppercase tracking-[0.12em] text-slate-600">Source</p><p className="mono mt-2 text-xs text-slate-300">{selected.source}</p><p className="mt-1 text-xs text-slate-500">{selected.region}</p></div><div className="bg-[#101a25] p-4"><p className="mono text-[9px] uppercase tracking-[0.12em] text-slate-600">Service</p><p className="mt-2 text-sm font-medium text-slate-200">{selected.service}</p><p className="mt-1 text-xs text-slate-500">normalized audit signal</p></div></div><section className="mt-7"><p className="mono text-[10px] uppercase tracking-[0.14em] text-[#76eddb]">AI explanation</p><div className="mt-3 rounded-xl border border-[#39e0c5]/15 bg-[#10242a]/35 p-4"><p className="text-sm leading-6 text-slate-300">{aiExplanationLoading ? "Generating explanation…" : (aiExplanation ?? selected.baseline)}</p></div></section><section className="mt-7"><p className="mono text-[10px] uppercase tracking-[0.14em] text-[#76eddb]">Evidence signals</p><div className="mt-3 space-y-2">{selected.signals.map((signal, index) => <div key={signal} className="flex items-center justify-between rounded-xl border border-white/[0.08] bg-white/[0.025] px-3.5 py-3"><div className="flex items-center gap-3"><span className="mono flex size-5 items-center justify-center rounded bg-white/[0.05] text-[9px] text-slate-500">0{index + 1}</span><span className="text-xs text-slate-300">{signal}</span></div><Check className="size-3.5 text-[#39e0c5]" /></div>)}</div></section><section className="mt-7 overflow-hidden rounded-xl border border-[#f5ae45]/20 bg-[#251c10]/45"><div className="flex gap-3 p-4"><CircleAlert className="mt-0.5 size-4 shrink-0 text-[#f5ae45]" /><div><p className="text-sm font-medium text-[#ffcf89]">Recommended response</p><p className="mt-1 text-xs leading-5 text-slate-400">{selected.recommended}</p></div></div></section><div className="mt-7 flex gap-3"><button onClick={() => { if (selected.status === "in_progress") { setSelected(null); return; } setFindingStatus(selected.id, "in_progress"); }} className="flex-1 rounded-xl bg-[#39e0c5] px-4 py-3 text-xs font-semibold text-[#071312] transition-transform active:scale-[0.97]">{selected.status === "in_progress" ? "Back to queue" : "Start investigation"}</button><button onClick={() => setFindingStatus(selected.id, "escalated")} className="rounded-xl border border-white/10 px-4 py-3 text-xs font-semibold text-slate-300 hover:bg-white/5">Escalate</button></div></div></aside></div>}
     </div>
   );
 }
 
 function BrandBlock() {
-  return <div className="flex items-center gap-3 px-2"><img src="/manus-storage/sentinel-mark_d44fb474.png" alt="Sentinel Access" className="size-9 object-contain" /><div><p className="text-sm font-semibold tracking-[-0.03em] text-slate-100">Sentinel<span className="text-[#59e9d2]">Access</span></p><p className="mono mt-0.5 text-[9px] uppercase tracking-[0.12em] text-slate-600">security intelligence</p></div></div>;
+  return <div className="flex items-center gap-3 px-2"><div className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#39e0c5]/25 to-[#39e0c5]/5 ring-1 ring-inset ring-[#39e0c5]/30"><ShieldCheck className="size-5 text-[#39e0c5]" /></div><div><p className="text-sm font-semibold tracking-[-0.03em] text-slate-100">Sentinel<span className="text-[#59e9d2]">Access</span></p><p className="mono mt-0.5 text-[9px] uppercase tracking-[0.12em] text-slate-600">security intelligence</p></div></div>;
 }

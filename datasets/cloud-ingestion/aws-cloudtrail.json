@@ -1,0 +1,286 @@
+{
+  "Records": [
+    {
+      "eventVersion": "1.09",
+      "userIdentity": {
+        "type": "IAMUser",
+        "principalId": "aisha.rahman",
+        "arn": "arn:aws:iam::111122223333:user/aisha.rahman",
+        "accountId": "111122223333"
+      },
+      "eventTime": "2026-08-18T01:15:00Z",
+      "eventSource": "signin.amazonaws.com",
+      "eventName": "ConsoleLogin",
+      "awsRegion": "ap-southeast-1",
+      "sourceIPAddress": "198.51.100.10",
+      "userAgent": "sentinel-demo-client/1.0",
+      "requestParameters": {
+        "demo": true
+      },
+      "responseElements": {
+        "status": "ok"
+      },
+      "requestID": "aws-session-001",
+      "eventID": "aws-evt-0001",
+      "readOnly": false,
+      "resources": [],
+      "eventType": "AwsApiCall",
+      "managementEvent": true,
+      "recipientAccountId": "111122223333"
+    },
+    {
+      "eventVersion": "1.09",
+      "userIdentity": {
+        "type": "IAMUser",
+        "principalId": "marco.silva",
+        "arn": "arn:aws:iam::111122223333:user/marco.silva",
+        "accountId": "111122223333"
+      },
+      "eventTime": "2026-08-18T01:20:00Z",
+      "eventSource": "s3.amazonaws.com",
+      "eventName": "GetObject",
+      "awsRegion": "ap-southeast-1",
+      "sourceIPAddress": "198.51.100.11",
+      "userAgent": "sentinel-demo-client/1.0",
+      "requestParameters": {
+        "demo": true
+      },
+      "responseElements": {
+        "status": "ok"
+      },
+      "requestID": "aws-session-002",
+      "eventID": "aws-evt-0002",
+      "readOnly": true,
+      "resources": [
+        {
+          "type": "AWS::S3::Object",
+          "ARN": "arn:aws:s3:::sentinel-demo-bucket/reports/summary.csv"
+        }
+      ],
+      "eventType": "AwsApiCall",
+      "managementEvent": true,
+      "recipientAccountId": "111122223333"
+    },
+    {
+      "eventVersion": "1.09",
+      "userIdentity": {
+        "type": "IAMUser",
+        "principalId": "aisha.rahman",
+        "arn": "arn:aws:iam::111122223333:user/aisha.rahman",
+        "accountId": "111122223333"
+      },
+      "eventTime": "2026-08-18T01:30:00Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "AttachRolePolicy",
+      "awsRegion": "ap-southeast-1",
+      "sourceIPAddress": "203.0.113.20",
+      "userAgent": "sentinel-demo-client/1.0",
+      "requestParameters": {
+        "demo": true
+      },
+      "responseElements": {
+        "status": "ok"
+      },
+      "requestID": "aws-session-003",
+      "eventID": "aws-evt-0003",
+      "readOnly": false,
+      "resources": [
+        {
+          "type": "AWS::IAM::Role",
+          "ARN": "arn:aws:iam::111122223333:role/demo-ops-role"
+        }
+      ],
+      "eventType": "AwsApiCall",
+      "managementEvent": true,
+      "recipientAccountId": "111122223333"
+    },
+    {
+      "eventVersion": "1.09",
+      "userIdentity": {
+        "type": "AssumedRole",
+        "principalId": "demo-deploy-role",
+        "arn": "arn:aws:iam::111122223333:role/demo-deploy-role",
+        "accountId": "111122223333"
+      },
+      "eventTime": "2026-08-18T01:35:00Z",
+      "eventSource": "secretsmanager.amazonaws.com",
+      "eventName": "GetSecretValue",
+      "awsRegion": "ap-southeast-1",
+      "sourceIPAddress": "192.0.2.44",
+      "userAgent": "sentinel-demo-client/1.0",
+      "requestParameters": {
+        "demo": true
+      },
+      "responseElements": null,
+      "requestID": "aws-session-004",
+      "eventID": "aws-evt-0004",
+      "readOnly": true,
+      "resources": [
+        {
+          "type": "AWS::SecretsManager::Secret",
+          "ARN": "arn:aws:secretsmanager:ap-southeast-1:111122223333:secret:demo/database"
+        }
+      ],
+      "eventType": "AwsApiCall",
+      "managementEvent": true,
+      "recipientAccountId": "111122223333",
+      "errorCode": "AccessDenied",
+      "errorMessage": "Synthetic access denied"
+    },
+    {
+      "eventVersion": "1.09",
+      "userIdentity": {
+        "type": "IAMUser",
+        "principalId": "aisha.rahman",
+        "arn": "arn:aws:iam::111122223333:user/aisha.rahman",
+        "accountId": "111122223333"
+      },
+      "eventTime": "2026-08-18T01:40:00Z",
+      "eventSource": "cloudtrail.amazonaws.com",
+      "eventName": "StopLogging",
+      "awsRegion": "ap-southeast-1",
+      "sourceIPAddress": "203.0.113.20",
+      "userAgent": "sentinel-demo-client/1.0",
+      "requestParameters": {
+        "demo": true
+      },
+      "responseElements": {
+        "status": "ok"
+      },
+      "requestID": "aws-session-005",
+      "eventID": "aws-evt-0005",
+      "readOnly": false,
+      "resources": [
+        {
+          "type": "AWS::CloudTrail::Trail",
+          "ARN": "arn:aws:cloudtrail:ap-southeast-1:111122223333:trail/demo-audit"
+        }
+      ],
+      "eventType": "AwsApiCall",
+      "managementEvent": true,
+      "recipientAccountId": "111122223333"
+    },
+    {
+      "eventVersion": "1.09",
+      "userIdentity": {
+        "type": "IAMUser",
+        "principalId": "marco.silva",
+        "arn": "arn:aws:iam::111122223333:user/marco.silva",
+        "accountId": "111122223333"
+      },
+      "eventTime": "2026-08-18T01:45:00Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "ListRoles",
+      "awsRegion": "ap-southeast-1",
+      "sourceIPAddress": null,
+      "userAgent": "sentinel-demo-client/1.0",
+      "requestParameters": {
+        "demo": true
+      },
+      "responseElements": {
+        "status": "ok"
+      },
+      "requestID": null,
+      "eventID": "aws-evt-0006",
+      "readOnly": true,
+      "resources": [],
+      "eventType": "AwsApiCall",
+      "managementEvent": true,
+      "recipientAccountId": "111122223333"
+    },
+    {
+      "eventVersion": "1.09",
+      "userIdentity": {
+        "type": "IAMUser",
+        "principalId": "marco.silva",
+        "arn": "arn:aws:iam::111122223333:user/marco.silva",
+        "accountId": "111122223333"
+      },
+      "eventTime": "2026-08-18T01:20:00Z",
+      "eventSource": "s3.amazonaws.com",
+      "eventName": "GetObject",
+      "awsRegion": "ap-southeast-1",
+      "sourceIPAddress": "198.51.100.11",
+      "userAgent": "sentinel-demo-client/1.0",
+      "requestParameters": {
+        "demo": true
+      },
+      "responseElements": {
+        "status": "ok"
+      },
+      "requestID": "aws-session-002",
+      "eventID": "aws-evt-0002",
+      "readOnly": true,
+      "resources": [
+        {
+          "type": "AWS::S3::Object",
+          "ARN": "arn:aws:s3:::sentinel-demo-bucket/reports/summary.csv"
+        }
+      ],
+      "eventType": "AwsApiCall",
+      "managementEvent": true,
+      "recipientAccountId": "111122223333"
+    },
+    {
+      "eventVersion": "1.09",
+      "userIdentity": {
+        "type": "IAMUser",
+        "principalId": "unmapped.user",
+        "arn": "arn:aws:iam::111122223333:user/unmapped.user",
+        "accountId": "111122223333"
+      },
+      "eventTime": "2026-08-18T01:50:00Z",
+      "eventSource": "ec2.amazonaws.com",
+      "eventName": "DescribeInstances",
+      "awsRegion": "ap-southeast-1",
+      "sourceIPAddress": "192.0.2.55",
+      "userAgent": "sentinel-demo-client/1.0",
+      "requestParameters": {
+        "demo": true
+      },
+      "responseElements": {
+        "status": "ok"
+      },
+      "requestID": "aws-session-007",
+      "eventID": "aws-evt-0007",
+      "readOnly": true,
+      "resources": [
+        {
+          "type": "AWS::EC2::Instance",
+          "ARN": "arn:aws:ec2:ap-southeast-1:111122223333:instance/i-demo0001"
+        }
+      ],
+      "eventType": "AwsApiCall",
+      "managementEvent": true,
+      "recipientAccountId": "111122223333"
+    },
+    {
+      "eventVersion": "1.09",
+      "userIdentity": {
+        "type": "IAMUser",
+        "principalId": "aisha.rahman",
+        "arn": "arn:aws:iam::111122223333:user/aisha.rahman",
+        "accountId": "111122223333"
+      },
+      "eventTime": "not-a-timestamp",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "ListUsers",
+      "awsRegion": "ap-southeast-1",
+      "sourceIPAddress": "198.51.100.10",
+      "userAgent": "sentinel-demo-client/1.0",
+      "requestParameters": {
+        "demo": true
+      },
+      "responseElements": {
+        "status": "ok"
+      },
+      "requestID": "aws-session-008",
+      "eventID": "aws-evt-0008",
+      "readOnly": true,
+      "resources": [],
+      "eventType": "AwsApiCall",
+      "managementEvent": true,
+      "recipientAccountId": "111122223333"
+    }
+  ]
+}

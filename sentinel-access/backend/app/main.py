@@ -3,7 +3,18 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.routers import activity, command_center, configuration, datasets, estate, identities, policies, reports
+from app.routers import (
+    activity,
+    command_center,
+    configuration,
+    copilot,
+    datasets,
+    estate,
+    identities,
+    policies,
+    reports,
+    risk_assessments,
+)
 from app.store import get_store
 
 
@@ -36,3 +47,5 @@ app.include_router(policies.router)
 app.include_router(reports.router)
 app.include_router(configuration.router)
 app.include_router(datasets.router)
+app.include_router(copilot.router)
+app.include_router(risk_assessments.router)

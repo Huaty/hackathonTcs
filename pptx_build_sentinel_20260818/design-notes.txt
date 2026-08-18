@@ -1,0 +1,7 @@
+Communication job: By the end, hackathon judges should understand and value Sentinel Access because it combines a working analyst experience with constrained AI, transparent security controls, and a credible expansion architecture.
+
+Visual route: Codex Grid-inspired white canvas, strong black typography, thin rules, restrained panels, and Signal Teal as the single project-specific accent.
+
+Selected composition references: slide-01 sparse cover, slide-08 split field, slide-13 four-point grid, slide-17 three-stage timeline.
+
+Narrative arc: problem -> traceable solution -> technical proof -> AI guardrails -> innovation -> scale -> resolved value proposition.

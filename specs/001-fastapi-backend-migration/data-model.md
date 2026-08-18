@@ -207,4 +207,10 @@ Store
 computed from `findings`/`activity_log` on each request so that a start-
 investigation, escalate, or simulate-anomaly action is immediately reflected
 without a separate update path to keep in sync (avoids a second source of
-truth for the same numbers, per constitution Principle III).
+truth for the same numbers, per constitution Principle III). Specifically:
+`needsAttention` = count of findings whose `status` is not `escalated`
+(open/in-progress findings still need a decision; escalated ones have been
+handed off), and `mostUrgentCase` = the title of the highest-`score` finding
+among that same active set. These are correctness-first computations and are
+not required to match the original static demo's hardcoded KPI values (see
+spec SC-005).

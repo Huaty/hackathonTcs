@@ -1,0 +1,36 @@
+{
+  "generatorVersion": "cloud-ingestion-fixtures-v1",
+  "seed": 501,
+  "anchorDate": "2026-08-18",
+  "normalizerVersion": "cloud-normalizer-v1",
+  "mappingVersion": "identity-map-v1",
+  "providers": {
+    "aws_cloudtrail": {
+      "records": 9,
+      "normalized": 6,
+      "duplicates": 1,
+      "quarantined": 2
+    },
+    "azure_activity_log": {
+      "records": 8,
+      "normalized": 5,
+      "duplicates": 1,
+      "quarantined": 2
+    },
+    "gcp_audit_log": {
+      "records": 9,
+      "normalized": 6,
+      "duplicates": 1,
+      "quarantined": 2
+    }
+  },
+  "identityBindingCount": 9,
+  "oracleRecordCount": 26,
+  "fileDigests": {
+    "aws-cloudtrail.json": "3ac7adb6de7d906a763a344c79aa614f0bc87b064e1a55cec9e4c70529b4656d",
+    "azure-activity-log.json": "063b4d9ffa9526b3f81e117071f3d1bde1b90e1d4c6f50a90cd7950f0e07e986",
+    "expected-normalized-events.jsonl": "bb4d1a6fbaf6422df205dd5bffb49494a5b4bb16d69581e07a0a147f3224363e",
+    "gcp-audit-log.jsonl": "ff42894e71e796e26d4b5770869f8f6dbb671273a04c616d5ad4a78fbf014e90",
+    "identity-bindings.json": "d499b2f3a070124cca8252b0e45331773bf8e8f3bb85bc5a264c539c3d27bde2"
+  }
+}

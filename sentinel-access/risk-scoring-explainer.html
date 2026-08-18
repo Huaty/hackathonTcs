@@ -1,0 +1,363 @@
+<title>How We Score Risk</title>
+<style>
+  :root {
+    --bg: #F5F7FA;
+    --surface: #FFFFFF;
+    --surface-alt: #EEF2F6;
+    --ink: #172033;
+    --ink-muted: #566178;
+    --border: #DCE3EC;
+    --accent: #2563A8;
+    --accent-soft: #DCEAFB;
+    --accent-ink: #14477C;
+    --low: #1E8E5A;
+    --low-soft: #E1F5EA;
+    --medium: #B7791F;
+    --medium-soft: #FBF0DC;
+    --high: #C2410C;
+    --high-soft: #FBE6DA;
+    --critical: #B91C1C;
+    --critical-soft: #FAE0E0;
+    --shadow: 0 1px 2px rgba(23,32,51,0.04), 0 8px 20px -12px rgba(23,32,51,0.14);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0E1520;
+      --surface: #161F2C;
+      --surface-alt: #1C2634;
+      --ink: #E7ECF3;
+      --ink-muted: #93A1B7;
+      --border: #29354A;
+      --accent: #74AAE0;
+      --accent-soft: #1D2E44;
+      --accent-ink: #BEDCF7;
+      --low: #4ADE94;
+      --low-soft: #163425;
+      --medium: #F0BB56;
+      --medium-soft: #362A14;
+      --high: #F5895A;
+      --high-soft: #3A2417;
+      --critical: #F47C7C;
+      --critical-soft: #3A1B1B;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0E1520;
+    --surface: #161F2C;
+    --surface-alt: #1C2634;
+    --ink: #E7ECF3;
+    --ink-muted: #93A1B7;
+    --border: #29354A;
+    --accent: #74AAE0;
+    --accent-soft: #1D2E44;
+    --accent-ink: #BEDCF7;
+    --low: #4ADE94;
+    --low-soft: #163425;
+    --medium: #F0BB56;
+    --medium-soft: #362A14;
+    --high: #F5895A;
+    --high-soft: #3A2417;
+    --critical: #F47C7C;
+    --critical-soft: #3A1B1B;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.5;
+  }
+  .page {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 56px 32px 72px;
+  }
+  .mono {
+    font-family: Consolas, "SF Mono", "Cascadia Mono", monospace;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* header */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 14px;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  h1 {
+    font-size: clamp(32px, 4.2vw, 44px);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 0 0 12px;
+    text-wrap: balance;
+  }
+  .subtitle {
+    font-size: 18px;
+    color: var(--ink-muted);
+    max-width: 640px;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  h2 {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin: 0 0 20px;
+  }
+  section { margin-top: 56px; }
+
+  /* pipeline */
+  .pipeline {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    align-items: stretch;
+  }
+  .step {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px 20px;
+    box-shadow: var(--shadow);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .step + .step { margin-left: 28px; }
+  .step-num {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+    font-weight: 700;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .step h3 {
+    font-size: 16px;
+    margin: 0;
+    font-weight: 700;
+  }
+  .step p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--ink-muted);
+  }
+  .arrow {
+    position: absolute;
+    top: 50%;
+    right: -28px;
+    transform: translate(50%, -50%);
+    width: 20px;
+    height: 20px;
+    z-index: 2;
+    color: var(--ink-muted);
+  }
+  .step:last-child .arrow { display: none; }
+
+  /* guardrails */
+  .guardrails {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+  .rail {
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 13.5px;
+    color: var(--ink);
+  }
+  .rail b { display: block; font-size: 13px; color: var(--accent-ink); margin-bottom: 4px; }
+
+  /* example */
+  .example-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px 28px 24px;
+    box-shadow: var(--shadow);
+  }
+  .example-title {
+    font-size: 14px;
+    color: var(--ink-muted);
+    margin: 0 0 18px;
+  }
+  .formula {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 15px;
+  }
+  .chip {
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 108px;
+  }
+  .chip .label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-muted); }
+  .chip .value { font-size: 18px; font-weight: 700; }
+  .op { color: var(--ink-muted); font-size: 18px; font-weight: 600; }
+  .result-chip {
+    background: var(--critical-soft);
+    border: 1px solid var(--critical);
+    color: var(--critical);
+  }
+  .result-chip .value { color: var(--critical); }
+  .example-note {
+    margin: 18px 0 0;
+    font-size: 13.5px;
+    color: var(--ink-muted);
+  }
+
+  /* severity legend */
+  .legend {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+  .sev {
+    border-radius: 10px;
+    padding: 16px 18px;
+    border: 1px solid var(--border);
+  }
+  .sev .range { font-size: 13px; opacity: 0.85; margin-top: 2px; }
+  .sev .name { font-size: 16px; font-weight: 700; }
+  .sev.low { background: var(--low-soft); color: var(--low); }
+  .sev.medium { background: var(--medium-soft); color: var(--medium); }
+  .sev.high { background: var(--high-soft); color: var(--high); }
+  .sev.critical { background: var(--critical-soft); color: var(--critical); }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--ink-muted);
+  }
+
+  @media (max-width: 860px) {
+    .pipeline, .guardrails, .legend { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .step + .step { margin-left: 0; }
+    .arrow { display: none; }
+  }
+  @media (max-width: 520px) {
+    .pipeline, .guardrails, .legend { grid-template-columns: 1fr; }
+  }
+</style>
+
+<div class="page">
+  <p class="eyebrow">Sentinel Access · Risk Engine</p>
+  <h1>How we score risk</h1>
+  <p class="subtitle">Every action gets a score from 0–100 in four steps: know what's normal, check it against fixed rules, let AI add bounded context, then calculate a final number. No step can override the ones before it.</p>
+
+  <section>
+    <h2>The four steps</h2>
+    <div class="pipeline">
+      <div class="step">
+        <span class="step-num">1</span>
+        <h3>Learn what's normal</h3>
+        <p>We build a 30-day profile per person: usual hours, locations, and services. Needs at least 20 events across 7 days before we trust it.</p>
+        <svg class="arrow" viewBox="0 0 20 20" fill="none"><path d="M2 10h14M10 4l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="step">
+        <span class="step-num">2</span>
+        <h3>Check fixed rules</h3>
+        <p>The action is checked against a published rule catalog &mdash; admin changes, secret access, unusual times. Each match adds set points.</p>
+        <svg class="arrow" viewBox="0 0 20 20" fill="none"><path d="M2 10h14M10 4l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="step">
+        <span class="step-num">3</span>
+        <h3>Add AI context</h3>
+        <p>AI reviews the surrounding events and may nudge the score, only within a fixed range, and only when it can point to real evidence.</p>
+        <svg class="arrow" viewBox="0 0 20 20" fill="none"><path d="M2 10h14M10 4l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="step">
+        <span class="step-num">4</span>
+        <h3>Calculate final score</h3>
+        <p>Rule points plus the AI nudge, never below the minimum set by the most serious rule that matched. That number sets severity.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Why the AI step can be trusted</h2>
+    <div class="guardrails">
+      <div class="rail"><b>Bounded</b>Can only move the score by one of six fixed amounts, never an arbitrary number.</div>
+      <div class="rail"><b>Evidence required</b>Any adjustment must cite real event IDs from that person's activity.</div>
+      <div class="rail"><b>Confidence checked</b>Below 60% confidence, the adjustment is discarded automatically.</div>
+      <div class="rail"><b>Fails safe</b>If the AI is unavailable, scoring still runs on rules alone &mdash; nothing blocks.</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Worked example</h2>
+    <div class="example-card">
+      <p class="example-title">A login from a new location, followed by an admin permission change</p>
+      <div class="formula">
+        <div class="chip">
+          <span class="label">Rule points</span>
+          <span class="value mono">65</span>
+        </div>
+        <span class="op">+</span>
+        <div class="chip">
+          <span class="label">AI nudge</span>
+          <span class="value mono">+20</span>
+        </div>
+        <span class="op">=</span>
+        <div class="chip">
+          <span class="label">Score</span>
+          <span class="value mono">85</span>
+        </div>
+        <span class="op">&rarr;</span>
+        <div class="chip result-chip">
+          <span class="label">Severity</span>
+          <span class="value">Critical</span>
+        </div>
+      </div>
+      <p class="example-note">The AI added 20 points because this exact new-location admin change matched a known escalation pattern, citing the two events as evidence. Without that evidence, its adjustment would have been thrown out and the score would have stayed at 65 (High).</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Severity bands</h2>
+    <div class="legend">
+      <div class="sev low"><div class="name">Low</div><div class="range mono">0&ndash;39</div></div>
+      <div class="sev medium"><div class="name">Medium</div><div class="range mono">40&ndash;64</div></div>
+      <div class="sev high"><div class="name">High</div><div class="range mono">65&ndash;84</div></div>
+      <div class="sev critical"><div class="name">Critical</div><div class="range mono">85&ndash;100</div></div>
+    </div>
+  </section>
+
+  <footer>Same event, same inputs, same score &mdash; every time. Rules are published and fixed; AI can only adjust within limits it must justify.</footer>
+</div>
